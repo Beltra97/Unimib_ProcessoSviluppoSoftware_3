@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>JOBS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		-------- LIST OF ALL JOB -------- 
+		<br>
+		<table border="1">
+			<tr>
+				<th> Job Name </th>
+				<th>  </th>
+			</tr>
+			<tr th:each="job : ${jobs}"> 
+				<td width="100" align="center"> <a th:href="@{jobs/{id}(id = ${job.id})}" th:text="${job.jobName}"></a> </td>
+				<td width="100" align="center"> <a th:href="@{deletejob{id}(id=${job.id})}">Delete</a> </td>
+			</tr>
+		</table>
+		<br>
+		Click a job to view job details
+		<br><br>
+		--------- ADD A NEW JOB ---------
+		<br>
+		<form action="#" th:action="@{addjob}" th:object="${job}" method="post">
+	    	<p>Name: <input type="text" name="addName"/></p>
+	        <p>Salary: <input type="text" name="addSalary" /></p>
+	        <p><input type="submit" value="Add a new job" /> <input type="reset" value="Clean values" /></p>
+	    </form>
+	    <br><br>
+	    --------- SEARCH A JOB BY NAME ---------
+		<br>
+		<form action="#" th:action="@{searchJob}" th:object="${job}" method="post">
+	    	<p>Name: <input type="text" name="jobSearchName"/></p>
+	        <p><input type="submit" value="Search job" /></p>
+	    </form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="${'Job: ' + job.jobName + job.jobSalary}"></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		JOB DETAILS: <br><br>
+		
+		<form action="#" th:action="@{http://localhost:8080/jobs/updatejob{id}(id = ${job.id})}" th:object="${job}" method="post">
+			<table>
+			<tr>
+				<td> Job Id: </td>
+				<td> <Input type="text" th:value="${job.id}" size="1" readonly /> </td>
+			</tr>
+			<tr>
+				<td> Job Name: </td>
+				<td> <Input type="text" name="updateName" th:value="${job.jobName}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Job Salary: </td>
+				<td> <Input type="text" name="updateSalary" th:value="${job.jobSalary}" size="10" /> $ </td>
+			</tr>
+			</table>
+			<input type="submit" value="Update job">
+		</form>	
+					
+		<br>
+		<a href="http://localhost:8080/jobs">Return to jobs list</a>
+	</div>
+</body>
+</html>
