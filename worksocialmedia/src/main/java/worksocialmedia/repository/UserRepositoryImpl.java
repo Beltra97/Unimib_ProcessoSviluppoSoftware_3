@@ -32,5 +32,51 @@ public class UserRepositoryImpl implements UserRepository {
     entityManager.close();
     return users;
   }
+  
+  public void deleteUserById(Long id) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		}
+		User user = entityManager.find(User.class, id);
+		entityManager.remove(user);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	  }
+  
+  public void addUser(User user) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		}
+		entityManager.persist(user);	
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	  }
+  
+  public void updateUser(Long id, String firstname, String lastname, String gender, String birthdate) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		}
+		User user = entityManager.find(User.class, id);
+		user.setFirstName(firstname);
+		user.setLastName(lastname);
+		user.setGender(gender);
+		user.setBirthDate(birthdate);
+		entityManager.persist(user);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	  }
+  
+  public User searchUser(String userSearchLastName) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+			  
+		User user = (User) entityManager.createQuery("FROM User u WHERE u.lastName = '" + userSearchLastName + "'").getSingleResult();
+
+		entityManager.close();
+			  
+		return user;
+	  }
 
 }

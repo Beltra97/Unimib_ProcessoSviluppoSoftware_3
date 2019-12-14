@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="${'Company: ' + company.name}"></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		COMPANY DETAILS: <br><br>
+		
+		<form action="#" th:action="@{http://localhost:8080/companies/updatecompany{id}(id = ${company.id})}" th:object="${company}" method="post">
+			<table>
+			<tr>
+				<td> Company Id: </td>
+				<td> <Input type="text" th:value="${company.id}" size="1" readonly /> </td>
+			</tr>
+			<tr>
+				<td> Company Name: </td>
+				<td> <Input type="text" name="updateName" th:value="${company.name}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Company CEO: </td>
+				<td> <Input type="text" name="updateCEO" th:value="${company.CEO}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Company Number of Employees: </td>
+				<td> <Input type="text" name="updateNumberEmployees" th:value="${company.numberEmployees}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Company Year of Foundation: </td>
+				<td> <Input type="text" name="updateFoundationYear" th:value="${company.foundationYear}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Company Description: </td>
+				<td> <Input type="text" name="updateDescription" th:value="${company.description}" size="10" /> </td>
+			</tr>
+			</table>
+			<input type="submit" value="Update company">
+		</form>	
+					
+		<br>
+		<a href="http://localhost:8080/companies">Return to companies list</a>
+	</div>
+</body>
+</html>

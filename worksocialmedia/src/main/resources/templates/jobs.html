@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>JOBS</title>
+<title>JOBS HOME PAGE</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div>
-		-------- LIST OF ALL JOB -------- 
+		-------- LIST OF ALL JOBS -------- 
 		<br>
 		<table border="1">
 			<tr>
@@ -31,10 +31,12 @@
 	    <br><br>
 	    --------- SEARCH A JOB BY NAME ---------
 		<br>
-		<form action="#" th:action="@{searchJob}" th:object="${job}" method="post">
+		<form action="#" th:action="@{searchjob}" th:object="${job}" method="post">
 	    	<p>Name: <input type="text" name="jobSearchName"/></p>
 	        <p><input type="submit" value="Search job" /></p>
 	    </form>
+	    <br><br>
+	    <a href="http://localhost:8080">Return to entities list</a>
 	</div>
 </body>
 </html>

@@ -18,29 +18,37 @@ public class User implements Serializable {
   private static final long serialVersionUID = -5124436115031696628L;
   
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", unique = true)
   private Long id;
   @Column(name = "first_name", nullable = false)
   private String firstName;
   @Column(name = "last_name", nullable = true)
   private String lastName;
+  @Column(name = "gender", nullable = true)
+  private String gender;
+  @Column(name = "birth_date", nullable = true)
+  private String birthDate;
   
-  @ManyToOne
-  @JoinColumn(name="job_id")
-  private Job job;
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name="job_id") private Job job;
+	 */
   
   protected User() {
   }
 
-  public User(String firstName, String lastName) {
+  public User(String firstName, String lastName, String gender, String birthDate) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.gender = gender;
+    this.birthDate = birthDate;
   }
 
   @Override
   public String toString() {
-    return String.format("User[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
+    return String.format("User[id=%d, firstName='%s', lastName='%s', gender='%s', birthDate='%s']", id, firstName, lastName, gender, birthDate);
   }
 
   public Long getId() {
@@ -54,5 +62,29 @@ public class User implements Serializable {
   public String getLastName() {
     return lastName;
   }
+
+  public String getGender() {
+	    return gender;
+  }
+
+  public String getBirthDate() {
+	    return birthDate;
+  }
   
+  public void setFirstName(String firstName){
+	    this.firstName = firstName;
+  }
+  
+  public void setLastName(String lastName){
+	    this.lastName = lastName;
+  }
+  
+  public void setGender(String gender){
+	    this.gender = gender;
+  }
+  
+  public void setBirthDate(String birthDate){
+	    this.birthDate = birthDate;
+  }
+
 }

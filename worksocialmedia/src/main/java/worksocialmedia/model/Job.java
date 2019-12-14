@@ -28,9 +28,10 @@ public class Job implements Serializable {
   @Column(name = "job_salary", nullable = false)
   private Integer jobSalary;
   
-  @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
-  private List<User> users;
-  
+	/*
+	 * @OneToMany(mappedBy = "job", cascade = CascadeType.ALL) private List<User>
+	 * users;
+	 */
   protected Job() {
   }
 
@@ -62,6 +63,6 @@ public class Job implements Serializable {
   
   public void setJobSalary(Integer jobsalary){
 	    this.jobSalary = jobsalary;
-}
+  }
 
 }

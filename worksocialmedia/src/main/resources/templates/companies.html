@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>COMPANIES HOME PAGE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		-------- LIST OF ALL COMPANIES -------- 
+		<br>
+		<table border="1">
+			<tr>
+				<th> Company Name </th>
+				<th>  </th>
+			</tr>
+			<tr th:each="company : ${companies}"> 
+				<td width="100" align="center"> <a th:href="@{companies/{id}(id = ${company.id})}" th:text="${company.name}"></a> </td>
+				<td width="100" align="center"> <a th:href="@{deletecompany{id}(id=${company.id})}">Delete</a> </td>
+			</tr>
+		</table>
+		<br>
+		Click a company to view company details
+		<br><br>
+		--------- ADD A NEW COMPANY ---------
+		<br>
+		<form action="#" th:action="@{addcompany}" th:object="${company}" method="post">
+	    	<p>Name: <input type="text" name="addName"/></p>
+	        <p>CEO: <input type="text" name="addCEO" /></p>
+	        <p>Number of Employees: <input type="text" name="addNumberEmployees" /></p>
+	        <p>Year of Foundation: <input type="text" name="addFoundationYear" /></p>
+	        <p>Description: <input type="text" name="addDescription" /></p>
+	        <p><input type="submit" value="Add a new company" /> <input type="reset" value="Clean values" /></p>
+	    </form>
+	    <br><br>
+	    --------- SEARCH A COMPANY BY NAME ---------
+		<br>
+		<form action="#" th:action="@{searchcompany}" th:object="${company}" method="post">
+	    	<p>Name: <input type="text" name="companySearchName"/></p>
+	        <p><input type="submit" value="Search company" /></p>
+	    </form>
+	    <br><br>
+	    <a href="http://localhost:8080">Return to entities list</a>
+	</div>
+</body>
+</html>

@@ -7,74 +7,77 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import worksocialmedia.model.Job;
+import worksocialmedia.model.Company;
 
-public class JobRepositoryImpl implements JobRepository {
+public class CompanyRepositoryImpl implements CompanyRepository {
 
   private EntityManagerFactory entityManagerFactory;
 
-  public JobRepositoryImpl() {
+  public CompanyRepositoryImpl() {
     this.entityManagerFactory = Persistence.createEntityManagerFactory("worksocialmedia");
   }
 
   @Override
-  public Optional<Job> findById(Long id) {
+  public Optional<Company> findById(Long id) {
     final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-    Job job = entityManager.find(Job.class, id);
+    Company company = entityManager.find(Company.class, id);
     entityManager.close();
-    return Optional.ofNullable(job);
+    return Optional.ofNullable(company);
   }
 
   @Override
-  public Iterable<Job> findAll() {
+  public Iterable<Company> findAll() {
     final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-    List<Job> jobs = entityManager.createQuery("FROM Job", Job.class).getResultList();
+    List<Company> companies = entityManager.createQuery("FROM Company", Company.class).getResultList();
     entityManager.close();
-    return jobs;
+    return companies;
   }
   
-  public void deleteJobById(Long id) {
+  public void deleteCompanyById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		if (!entityManager.getTransaction().isActive()) {
 			entityManager.getTransaction().begin();
 		}
-		Job job = entityManager.find(Job.class, id);
-		entityManager.remove(job);
+		Company company = entityManager.find(Company.class, id);
+		entityManager.remove(company);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	  }
   
-  public void addJob(Job job) {
+  public void addCompany(Company company) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		if (!entityManager.getTransaction().isActive()) {
 			entityManager.getTransaction().begin();
 		}
-		entityManager.persist(job);	
+		entityManager.persist(company);	
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	  }
   
-  public void updateJob(Long id, String jobname, Integer jobsalary) {
+  public void updateCompany(Long id, String name, String CEO, Integer numberEmployees, String foundationYear, String description) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		if (!entityManager.getTransaction().isActive()) {
 			entityManager.getTransaction().begin();
 		}
-		Job job = entityManager.find(Job.class, id);
-		job.setJobName(jobname);
-		job.setJobSalary(jobsalary);
-		entityManager.persist(job);
+		Company company = entityManager.find(Company.class, id);
+		company.setName(name);
+		company.setCEO(CEO);
+		company.setNumberEmployees(numberEmployees);
+		company.setFoundationYear(foundationYear);
+		company.setDescription(description);
+		entityManager.persist(company);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	  }
   
-  public Job searchJob(String jobSearchName) {
+  public Company searchCompany(String CompanySearchName) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		  
-		Job job = (Job) entityManager.createQuery("FROM Job j WHERE j.jobName = '" + jobSearchName + "'").getSingleResult();
+		Company company = (Company) entityManager.createQuery("FROM Company c WHERE c.name = '" + CompanySearchName + "'").getSingleResult();
 
 		entityManager.close();
 		  
-		return job;
+		return company;
 	  }
 
 }

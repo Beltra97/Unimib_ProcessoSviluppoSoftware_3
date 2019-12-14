@@ -36,7 +36,6 @@ public class JobController {
 
     return modelAndView;
   }
-
 	
   @GetMapping("jobs/{id}") 
   public ModelAndView job(@PathVariable("id") Long id) { 
@@ -51,15 +50,13 @@ public class JobController {
 	  return modelAndView; 
   }
 	  
-  
   @GetMapping("deletejob{id}")
   public String jobDelete(@PathVariable("id") Long id) {
 	  
-    jobRepository.deleteById(id);
+    jobRepository.deleteJobById(id);
     
-    return "redirect:jobs";
+    return "redirect:http://localhost:8080/jobs";
   }
-  
   
   @PostMapping("addjob")
   public String jobAdd(@RequestParam(value="addName") String name, @RequestParam(value="addSalary") Integer salary) {
@@ -80,7 +77,7 @@ public class JobController {
 	return "redirect:http://localhost:8080/jobs";
   }
   
-  @PostMapping("searchJob")
+  @PostMapping("searchjob")
   public ModelAndView jobSearch(@RequestParam("jobSearchName") String jobSearchName) {
 	
 	ModelAndView modelAndView = new ModelAndView();
@@ -92,6 +89,5 @@ public class JobController {
 	  
 	return modelAndView; 
   }
-
   
 }

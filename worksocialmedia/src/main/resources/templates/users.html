@@ -1,15 +1,45 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Users</title>
+<title>USERS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div>
-		<ul th:each="user : ${users}">
-			<li><a th:href="@{/users/{id}(id = ${user.id})}"
-				th:text="${user.firstName + ' ' + user.lastName}"></a></li>
-		</ul>
+		-------- LIST OF ALL USERS -------- 
+		<br>
+		<table border="1">
+			<tr>
+				<th> User Last Name </th>
+				<th>  </th>
+			</tr>
+			<tr th:each="user : ${users}"> 
+				<td width="100" align="center"> <a th:href="@{users/{id}(id = ${user.id})}" th:text="${user.lastName}"></a> </td>
+				<td width="100" align="center"> <a th:href="@{deleteuser{id}(id=${user.id})}">Delete</a> </td>
+			</tr>
+		</table>
+		<br>
+		Click a user to view user details
+		<br><br>
+		--------- ADD A NEW USER ---------
+		<br>
+		<form action="#" th:action="@{adduser}" th:object="${user}" method="post">
+	    	<p>First Name: <input type="text" name="addFirstName"/></p>
+	    	<p>Last Name: <input type="text" name="addLastName"/></p>
+	        <p>Gender: <input type="text" name="addGender"/></p>
+	        <p>Birth Date: <input type="text" name="addBirthDate"/></p>
+	        <p><input type="submit" value="Add a new user" /> <input type="reset" value="Clean values" /></p>
+	    </form>
+	    <br><br>
+	    --------- SEARCH A JOB BY NAME ---------
+		<br>
+		<form action="#" th:action="@{searchuser}" th:object="${user}" method="post">
+	    	<p>Name: <input type="text" name="userSearchLastName"/></p>
+	        <p><input type="submit" value="Search job" /></p>
+	    </form>
+	    <br><br>
+	    <a href="http://localhost:8080">Return to entities list</a>
+	    
 	</div>
 </body>
 </html>

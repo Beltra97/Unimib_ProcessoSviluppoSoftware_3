@@ -6,7 +6,36 @@
 </head>
 <body>
 	<div>
-		<p th:text="${user.id + ' ' + user.firstName + ' ' + user.lastName}"></p>
+		USER DETAILS: <br><br>
+		
+		<form action="#" th:action="@{http://localhost:8080/users/updateuser{id}(id = ${user.id})}" th:object="${user}" method="post">
+			<table>
+			<tr>
+				<td> User Id: </td>
+				<td> <Input type="text" th:value="${user.id}" size="1" readonly /> </td>
+			</tr>
+			<tr>
+				<td> User First Name: </td>
+				<td> <Input type="text" name="updateFirstName" th:value="${user.firstName}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> User Last Name: </td>
+				<td> <Input type="text" name="updateLastName" th:value="${user.lastName}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> User Gender: </td>
+				<td> <Input type="text" name="updateGender" th:value="${user.gender}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> User Birth Date: </td>
+				<td> <Input type="text" name="updateBirthDate" th:value="${user.birthDate}" size="10" /> </td>
+			</tr>
+			</table>
+			<input type="submit" value="Update user">
+		</form>	
+					
+		<br>
+		<a href="http://localhost:8080/users">Return to users list</a>
 	</div>
 </body>
 </html>

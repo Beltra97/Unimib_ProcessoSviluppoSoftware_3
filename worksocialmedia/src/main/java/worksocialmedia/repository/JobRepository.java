@@ -4,14 +4,12 @@ import worksocialmedia.model.Job;
 
 public interface JobRepository extends Repository<Job, Long>{
 
-	public String deleteById(Long id);
+	public void deleteJobById(Long id);
 
-	public String addJob(Job job);
+	public void addJob(Job job);
 	
-	public String updateJob(Long id, String jobname, Integer jobsalary);
+	public void updateJob(Long id, String jobname, Integer jobsalary);
 	
 	public Job searchJob(String jobSearchName);
 	
 }
-
-
