@@ -26,9 +26,9 @@ di generalizzazione is-a.
 
 ## Modello logico
 
-User(Id, Name, Surname, Age, ResidentialAddress)
-FriendsOf(User1, User2, CreationDate)
-Company(Id, Name, CEO, Description, NumEmployees, FoundationYear, LegalAddress)
-WorkType(Id, Name, Description, Category)
-Works(User, Company, WorkType, Salary)
-Address(Id, Street, Municipality, CivicNumber, CAP, State)
+- User(Id, Name, Surname, Age, ResidentialAddress)  
+- FriendsOf(User1, User2, CreationDate)  
+- Company(Id, Name, CEO, Description, NumEmployees, FoundationYear, LegalAddress)  
+- WorkType(Id, Name, Description, Category)  
+- Works(User, Company, WorkType, Salary)  
+- Address(Id, Street, Municipality, CivicNumber, CAP, State)  
