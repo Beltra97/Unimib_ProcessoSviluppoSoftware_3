@@ -1,7 +1,5 @@
 package worksocialmedia.repository;
 
-import java.util.Optional;
-
 import worksocialmedia.model.Job;
 
 public interface JobRepository extends Repository<Job, Long>{
