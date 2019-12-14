@@ -22,7 +22,7 @@ Sono stati creati e utilizzati i branch master e develop.
 Il modello ER prevede 6 entità e 4 relazioni, tra cui una self (cioè su se stessa) e una
 di generalizzazione is-a.
 
-![ER MODEL](https://gitlab.com/davidefinati/2019_assignment3_jobsocialnetwork/blob/develop/Modello_ER.png)
+![ER MODEL](https://gitlab.com/davidefinati/2019_assignment3_jobsocialnetwork/develop/Modello_ER.png)
 
 ## Modello logico
 
