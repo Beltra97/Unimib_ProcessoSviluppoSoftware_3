@@ -7,12 +7,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import worksocialmedia.model.User;
 
 public class UserRepositoryImpl implements UserRepository {
 
   private EntityManagerFactory entityManagerFactory;
 
+  @Autowired
   public UserRepositoryImpl() {
     this.entityManagerFactory = Persistence.createEntityManagerFactory("worksocialmedia");
   }

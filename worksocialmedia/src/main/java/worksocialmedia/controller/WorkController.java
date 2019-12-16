@@ -13,14 +13,11 @@ import worksocialmedia.exception.WorkNotFoundException;
 import worksocialmedia.model.User;
 import worksocialmedia.model.Work;
 import worksocialmedia.repository.WorkRepository;
-import worksocialmedia.repository.UserRepository;
 import worksocialmedia.repository.WorkRepositoryImpl;
-import worksocialmedia.repository.UserRepositoryImpl;
 
 @Controller
 public class WorkController {
   private WorkRepository workRepository;
-  private UserRepository userRepository;
 
   public WorkController() {
     this.workRepository = new WorkRepositoryImpl();
@@ -61,10 +58,10 @@ public class WorkController {
   }
   
   @PostMapping("addwork")
-  public String workAdd(@RequestParam(value="addUser") String userSearchLastName, @RequestParam(value="addCompany") Integer company, @RequestParam(value="addJobType") Integer jobType, @RequestParam(value="addSalary") Integer salary, @RequestParam(value="addStartDate") String startDate, @RequestParam(value="addEndDate") String endDate) {
+  public String workAdd(@RequestParam(value="addUser") Long id, @RequestParam(value="addCompany") Integer company, @RequestParam(value="addJobType") Integer jobType, @RequestParam(value="addSalary") Integer salary, @RequestParam(value="addStartDate") String startDate, @RequestParam(value="addEndDate") String endDate) {
 	  
-	User user = userRepository.searchUser(userSearchLastName);
-	Work work = new Work(user, company, jobType, salary, startDate, endDate);
+	Optional<User> user = workRepository.findUserById(id);
+	Work work = new Work(user.get(), company, jobType, salary, startDate, endDate);
 	  
 	workRepository.addWork(work);
 	

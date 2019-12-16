@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import worksocialmedia.model.User;
 import worksocialmedia.model.Work;
 
 public class WorkRepositoryImpl implements WorkRepository {
@@ -23,6 +24,13 @@ public class WorkRepositoryImpl implements WorkRepository {
     Work work = entityManager.find(Work.class, id);
     entityManager.close();
     return Optional.ofNullable(work);
+  }
+  
+  public Optional<User> findUserById(Long id) {
+	    final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+	    User user = entityManager.find(User.class, id);
+	    entityManager.close();
+	    return Optional.ofNullable(user);
   }
 
   @Override
