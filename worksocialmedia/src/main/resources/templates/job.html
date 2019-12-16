@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title th:text="${'Job: ' + job.jobName + job.jobSalary}"></title>
+<title> JOB DETAILS </title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -16,11 +16,15 @@
 			</tr>
 			<tr>
 				<td> Job Name: </td>
-				<td> <Input type="text" name="updateName" th:value="${job.jobName}" size="10" /> </td>
+				<td> <Input type="text" name="updateName" th:value="${job.name}" size="10" /> </td>
 			</tr>
 			<tr>
-				<td> Job Salary: </td>
-				<td> <Input type="text" name="updateSalary" th:value="${job.jobSalary}" size="10" /> $ </td>
+				<td> Job Category: </td>
+				<td> <Input type="text" name="updateCategory" th:value="${job.category}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Job Description: </td>
+				<td> <Input type="text" name="updateDescription" th:value="${job.description}" size="10" /> </td>
 			</tr>
 			</table>
 			<input type="submit" value="Update job">

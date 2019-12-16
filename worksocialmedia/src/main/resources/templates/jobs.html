@@ -14,7 +14,7 @@
 				<th>  </th>
 			</tr>
 			<tr th:each="job : ${jobs}"> 
-				<td width="100" align="center"> <a th:href="@{jobs/{id}(id = ${job.id})}" th:text="${job.jobName}"></a> </td>
+				<td width="100" align="center"> <a th:href="@{jobs/{id}(id = ${job.id})}" th:text="${job.name}"></a> </td>
 				<td width="100" align="center"> <a th:href="@{deletejob{id}(id=${job.id})}">Delete</a> </td>
 			</tr>
 		</table>
@@ -25,7 +25,8 @@
 		<br>
 		<form action="#" th:action="@{addjob}" th:object="${job}" method="post">
 	    	<p>Name: <input type="text" name="addName"/></p>
-	        <p>Salary: <input type="text" name="addSalary" /></p>
+	        <p>Category: <input type="text" name="addCategory" /></p>
+	        <p>Description: <input type="text" name="addDescription" /></p>
 	        <p><input type="submit" value="Add a new job" /> <input type="reset" value="Clean values" /></p>
 	    </form>
 	    <br><br>

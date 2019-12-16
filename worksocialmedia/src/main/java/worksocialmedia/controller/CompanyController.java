@@ -57,7 +57,7 @@ public class CompanyController {
   }
   
   @PostMapping("addcompany")
-  public String userCompany(@RequestParam(value="addName") String name, @RequestParam(value="addCEO") String CEO, @RequestParam(value="addNumberEmployees") Integer numberEmployees, @RequestParam(value="addFoundationYear") String foundationYear, @RequestParam(value="addDescription") String description) {
+  public String companyAdd(@RequestParam(value="addName") String name, @RequestParam(value="addCEO") String CEO, @RequestParam(value="addNumberEmployees") Integer numberEmployees, @RequestParam(value="addFoundationYear") String foundationYear, @RequestParam(value="addDescription") String description) {
 
 	Company company = new Company(name, CEO, numberEmployees, foundationYear, description);
 	  

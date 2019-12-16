@@ -59,9 +59,9 @@ public class JobController {
   }
   
   @PostMapping("addjob")
-  public String jobAdd(@RequestParam(value="addName") String name, @RequestParam(value="addSalary") Integer salary) {
+  public String jobAdd(@RequestParam(value="addName") String name, @RequestParam(value="addCategory") String category, @RequestParam(value="addDescription") String description) {
 
-	Job job = new Job(name, salary);
+	Job job = new Job(name, category, description);
 	  
 	jobRepository.addJob(job);
 	
@@ -70,9 +70,9 @@ public class JobController {
   
   
   @PostMapping("jobs/updatejob{id}")
-  public String jobUpdate(@PathVariable("id") Long id, @RequestParam(value="updateName") String name, @RequestParam(value="updateSalary") Integer salary) {
+  public String jobUpdate(@PathVariable("id") Long id, @RequestParam(value="updateName") String name, @RequestParam(value="updateCategory") String category, @RequestParam(value="updateDescription") String description) {
 
-	jobRepository.updateJob(id, name, salary);
+	jobRepository.updateJob(id, name, category, description);
 	
 	return "redirect:http://localhost:8080/jobs";
   }

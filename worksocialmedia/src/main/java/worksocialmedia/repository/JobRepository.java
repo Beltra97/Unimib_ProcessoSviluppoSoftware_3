@@ -8,7 +8,7 @@ public interface JobRepository extends Repository<Job, Long>{
 
 	public void addJob(Job job);
 	
-	public void updateJob(Long id, String jobname, Integer jobsalary);
+	public void updateJob(Long id, String name, String category, String description);
 	
 	public Job searchJob(String jobSearchName);
 	

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>WORKS HOME PAGE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		-------- LIST OF ALL WORKS -------- 
+		<br>
+		<table border="1">
+			<tr>
+				<th> Company Name </th>
+				<th>  </th>
+			</tr>
+			<tr th:each="work : ${works}"> 
+				<td width="100" align="center"> <a th:href="@{works/{id}(id = ${work.id})}" th:text="${work.id}"></a> </td>
+				<td width="100" align="center"> <a th:href="@{deletework{id}(id=${work.id})}">Delete</a> </td>
+			</tr>
+		</table>
+		<br>
+		Click a work to view work details
+		<br><br>
+		--------- ADD A NEW WORK ---------
+		<br>
+		<form action="#" th:action="@{addwork}" th:object="${work}" method="post">
+	    	<p>User: <input type="text" name="addUser"/></p>
+	        <p>Company: <input type="text" name="addCompany" /></p>
+	        <p>Job Type: <input type="text" name="addJobType" /></p>
+	        <p>Salary: <input type="text" name="addSalary" /></p>
+	        <p>Start Date: <input type="text" name="addStartDate" /></p>
+	        <p>End Date: <input type="text" name="addEndDate" /></p>
+	        <p><input type="submit" value="Add a new work" /> <input type="reset" value="Clean values" /></p>
+	    </form>
+	    <br><br>
+	    <a href="http://localhost:8080">Return to entities list</a>
+	</div>
+</body>
+</html>

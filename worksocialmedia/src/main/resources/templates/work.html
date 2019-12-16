@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title> WORK DETAILS </title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		WORK DETAILS: <br><br>
+		
+		<form action="#" th:action="@{http://localhost:8080/works/updatework{id}(id = ${work.id})}" th:object="${work}" method="post">
+			<table>
+			<tr>
+				<td> Work Id: </td>
+				<td> <Input type="text" th:value="${work.id}" size="1" readonly /> </td>
+			</tr>
+			<tr>
+				<td> Work User ID: </td>
+				<td> <Input type="text" name="updateUser" th:value="${work.user}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Work Company ID: </td>
+				<td> <Input type="text" name="updateCompany" th:value="${work.company}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Work Job Type ID: </td>
+				<td> <Input type="text" name="updateJobType" th:value="${work.jobType}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Work Salary: </td>
+				<td> <Input type="text" name="updateSalary" th:value="${work.salary}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Work Start Date: </td>
+				<td> <Input type="text" name="updateStartDate" th:value="${work.startDate}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> Work End Date: </td>
+				<td> <Input type="text" name="updateEndDate" th:value="${work.endDate}" size="10" /> </td>
+			</tr>
+			</table>
+			<input type="submit" value="Update work">
+		</form>	
+					
+		<br>
+		<a href="http://localhost:8080/works">Return to works list</a>
+	</div>
+</body>
+</html>

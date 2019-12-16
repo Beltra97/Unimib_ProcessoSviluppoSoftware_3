@@ -23,10 +23,12 @@ public class Job implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", unique = true)
   private Long id;
-  @Column(name = "job_name", nullable = false)
-  private String jobName;
-  @Column(name = "job_salary", nullable = false)
-  private Integer jobSalary;
+  @Column(name = "name", nullable = false)
+  private String name;
+  @Column(name = "category", nullable = false)
+  private String category;
+  @Column(name = "description", nullable = false)
+  private String description;
   
 	/*
 	 * @OneToMany(mappedBy = "job", cascade = CascadeType.ALL) private List<User>
@@ -35,34 +37,43 @@ public class Job implements Serializable {
   protected Job() {
   }
 
-  public Job(String jobName, Integer jobSalary) {
-    this.jobName = jobName;
-    this.jobSalary = jobSalary;
+  public Job(String name, String category, String description) {
+    this.name = name;
+    this.category = category;
+    this.description = description;
   }
 
   @Override
   public String toString() {
-    return String.format("Job[id=%d, jobName='%s', jobSalary='%d']", id, jobName, jobSalary);
+    return String.format("Job[id=%d, name='%s', category='%s', description='%s']", id, name, category, description);
   }
 
   public Long getId() {
     return id;
   }
 
-  public String getJobName() {
-    return jobName;
+  public String getName() {
+    return name;
   }
   
-  public Integer getJobSalary() {
-	    return jobSalary;
+  public String getCategory() {
+	    return category;
   }
   
-  public void setJobName(String jobname){
-	    this.jobName = jobname;
+  public String getDescription() {
+	    return description;
   }
   
-  public void setJobSalary(Integer jobsalary){
-	    this.jobSalary = jobsalary;
+  public void setName(String name){
+	    this.name = name;
+  }
+  
+  public void setCategory(String category){
+	    this.category = category;
+  }
+  
+  public void setDescription(String description){
+	    this.description = description;
   }
 
 }
