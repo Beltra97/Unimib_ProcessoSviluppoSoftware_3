@@ -23,13 +23,6 @@ public class Work implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", unique = true)
   private Long id;
-	/*
-	 * @Column(name = "user", nullable = false) private Integer user;
-	 */
-  @Column(name = "company", nullable = false)
-  private Integer company;
-  @Column(name = "job_type", nullable = false)
-  private Integer jobType;
   @Column(name = "salary", nullable = false)
   private Integer salary;
   @Column(name = "start_date", nullable = false)
@@ -42,14 +35,22 @@ public class Work implements Serializable {
   @JoinColumn(name="user") 
   private User user;
   
+  @ManyToOne
+  @JoinColumn(name="company") 
+  private Company company;
+  
+  @ManyToOne
+  @JoinColumn(name="job") 
+  private Job job;
+
   
   protected Work() {
   }
 
-  public Work(User user, Integer company, Integer jobType, Integer salary, String startDate, String endDate) {
+  public Work(User user, Company company, Job job, Integer salary, String startDate, String endDate) {
     this.user = user;
     this.company = company;
-    this.jobType = jobType;
+    this.job = job;
     this.salary = salary;
     this.startDate = startDate;
     this.endDate = endDate;
@@ -57,7 +58,7 @@ public class Work implements Serializable {
 
   @Override
   public String toString() {
-    return String.format("Job[id=%d, user='%d', company='%d', jobType='%d', salary='%d', startDate='%s', endDate='%s']", id, user, company, jobType, salary, startDate, endDate);
+    return String.format("Job[id=%d, user='%d', company='%d', job='%d', salary='%d', startDate='%s', endDate='%s']", id, user, company, job, salary, startDate, endDate);
   }
 
   public Long getId() {
@@ -68,12 +69,12 @@ public class Work implements Serializable {
     return user;
   }
   
-  public Integer getCompany() {
+  public Company getCompany() {
 	    return company;
 	  }
   
-  public Integer getJobType() {
-	    return jobType;
+  public Job getJob() {
+	    return job;
   }
   
   public Integer getSalary() {
@@ -92,12 +93,12 @@ public class Work implements Serializable {
 	    this.user = user;
   }
   
-  public void setCompany(Integer company){
+  public void setCompany(Company company){
 	    this.company = company;
   }
   
-  public void setJobType(Integer jobType){
-	    this.jobType = jobType;
+  public void setJob(Job job){
+	    this.job = job;
   }
 
   public void setSalary(Integer salary){

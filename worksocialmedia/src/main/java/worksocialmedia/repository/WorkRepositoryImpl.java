@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import worksocialmedia.model.Company;
+import worksocialmedia.model.Job;
 import worksocialmedia.model.User;
 import worksocialmedia.model.Work;
 
@@ -32,6 +34,20 @@ public class WorkRepositoryImpl implements WorkRepository {
 	    entityManager.close();
 	    return Optional.ofNullable(user);
   }
+  
+  public Optional<Company> findCompanyById(Long id) {
+	    final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+	    Company company = entityManager.find(Company.class, id);
+	    entityManager.close();
+	    return Optional.ofNullable(company);
+  }
+  
+  public Optional<Job> findJobById(Long id) {
+	    final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+	    Job job = entityManager.find(Job.class, id);
+	    entityManager.close();
+	    return Optional.ofNullable(job);
+}
 
   @Override
   public Iterable<Work> findAll() {
@@ -61,5 +77,29 @@ public class WorkRepositoryImpl implements WorkRepository {
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	  }
+  
+  public void updateWork(Long id, Integer salary, String startDate, String endDate) {
+	  final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		}
+		Work work = entityManager.find(Work.class, id);
+		work.setSalary(salary);
+		work.setStartDate(startDate);
+		work.setEndDate(endDate);
+		entityManager.persist(work);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+  }
+  
+  public Work searchWork(Integer workSearchSalary) {
+	  final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+	  
+		Work work = (Work) entityManager.createQuery("FROM Work w WHERE w.salary = '" + workSearchSalary + "'").getSingleResult();
+
+		entityManager.close();
+		  
+		return work;
+  }
 
 }

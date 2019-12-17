@@ -30,10 +30,11 @@ public class Job implements Serializable {
   @Column(name = "description", nullable = false)
   private String description;
   
-	/*
-	 * @OneToMany(mappedBy = "job", cascade = CascadeType.ALL) private List<User>
-	 * users;
-	 */
+  
+  @OneToMany(mappedBy = "job", cascade = CascadeType.ALL) 
+  private List<Work> works;
+  
+  
   protected Job() {
   }
 

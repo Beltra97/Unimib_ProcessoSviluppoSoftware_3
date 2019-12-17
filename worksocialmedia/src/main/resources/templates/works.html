@@ -33,6 +33,13 @@
 	        <p><input type="submit" value="Add a new work" /> <input type="reset" value="Clean values" /></p>
 	    </form>
 	    <br><br>
+	    --------- SEARCH A WORK BY SALARY ---------
+		<br>
+		<form action="#" th:action="@{searchwork}" th:object="${work}" method="post">
+	    	<p>Salary: <input type="text" name="workSearchSalary"/></p>
+	        <p><input type="submit" value="Search work" /></p>
+	    </form>
+	    <br><br>
 	    <a href="http://localhost:8080">Return to entities list</a>
 	</div>
 </body>

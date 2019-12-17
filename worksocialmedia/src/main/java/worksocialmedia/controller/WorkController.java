@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import worksocialmedia.exception.WorkNotFoundException;
+import worksocialmedia.model.Company;
+import worksocialmedia.model.Job;
 import worksocialmedia.model.User;
 import worksocialmedia.model.Work;
 import worksocialmedia.repository.WorkRepository;
@@ -58,14 +60,37 @@ public class WorkController {
   }
   
   @PostMapping("addwork")
-  public String workAdd(@RequestParam(value="addUser") Long id, @RequestParam(value="addCompany") Integer company, @RequestParam(value="addJobType") Integer jobType, @RequestParam(value="addSalary") Integer salary, @RequestParam(value="addStartDate") String startDate, @RequestParam(value="addEndDate") String endDate) {
+  public String workAdd(@RequestParam(value="addUser") Long userId, @RequestParam(value="addCompany") Long companyId, @RequestParam(value="addJobType") Long jobId, @RequestParam(value="addSalary") Integer salary, @RequestParam(value="addStartDate") String startDate, @RequestParam(value="addEndDate") String endDate) {
 	  
-	Optional<User> user = workRepository.findUserById(id);
-	Work work = new Work(user.get(), company, jobType, salary, startDate, endDate);
+	Optional<User> user = workRepository.findUserById(userId);
+	Optional<Company> company = workRepository.findCompanyById(companyId);
+	Optional<Job> jobType = workRepository.findJobById(jobId);
+	Work work = new Work(user.get(), company.get(), jobType.get(), salary, startDate, endDate);
 	  
 	workRepository.addWork(work);
 	
 	return "redirect:works";
+  }
+  
+  @PostMapping("works/updatework{id}")
+  public String userUpdate(@PathVariable("id") Long id, @RequestParam(value="updateSalary") Integer salary, @RequestParam(value="updateStartDate") String startDate, @RequestParam(value="updateEndDate") String endDate) {
+
+	workRepository.updateWork(id, salary, startDate, endDate);
+	
+	return "redirect:http://localhost:8080/works";
+  }
+  
+  @PostMapping("searchwork")
+  public ModelAndView companySearch(@RequestParam("workSearchSalary") Integer workSearchSalary) {
+	
+	ModelAndView modelAndView = new ModelAndView();
+	  
+	Work work = workRepository.searchWork(workSearchSalary);
+	  
+	modelAndView.addObject("work", work); 
+	modelAndView.setViewName("work");
+	  
+	return modelAndView; 
   }
   
 }

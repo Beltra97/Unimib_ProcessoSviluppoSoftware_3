@@ -12,19 +12,35 @@
 			<table>
 			<tr>
 				<td> Work Id: </td>
-				<td> <Input type="text" th:value="${work.id}" size="1" readonly /> </td>
+				<td> <p th:value="${work.id}" th:text="${work.id}"> </p> </td>
 			</tr>
 			<tr>
-				<td> Work User ID: </td>
-				<td> <Input type="text" name="updateUser" th:value="${work.user}" size="10" /> </td>
+				<td> User details: </td>
+				<td> 
+					<!--  <Input type="text" name="updateUser" th:value="${work.user.id}" size="10" readonly/> -->
+					<p th:name="updateUserId" th:value="${work.user.id}" th:text="${'User ID: ' + work.user.id}"></p>
+					<p th:text="${'First name: ' + work.user.firstName + ', Last name: ' + work.user.lastName}"></p>
+					<p th:text="${'Gender: ' + work.user.gender + ', Birth date: ' + work.user.birthDate}"></p>
+				</td>
 			</tr>
 			<tr>
-				<td> Work Company ID: </td>
-				<td> <Input type="text" name="updateCompany" th:value="${work.company}" size="10" /> </td>
+				<td> Company details: </td>
+				<td> 
+					<!-- <Input type="text" name="updateCompanyId" th:value="${work.company}" size="10" /> -->
+					<p th:name="updateCompanyId" th:value="${work.company.id}" th:text="${'Company ID: ' + work.company.id}"></p>
+					<p th:text="${'Name: ' + work.company.name + ', Ceo: ' + work.company.CEO}"></p>
+					<p th:text="${'Number of employees: ' + work.company.numberEmployees + ', Foundation year: ' + work.company.foundationYear}"></p> 
+					<p th:text="${'Description: ' + work.company.description}"></p> 
+				</td>
 			</tr>
 			<tr>
-				<td> Work Job Type ID: </td>
-				<td> <Input type="text" name="updateJobType" th:value="${work.jobType}" size="10" /> </td>
+				<td> Job Type details: </td>
+				<td> 
+					<!-- <Input type="text" name="updateJobId" th:value="${work.jobType}" size="10" /> --> 
+					<p th:name="updateJobId" th:value="${work.job.id}" th:text="${'Job ID: ' + work.job.id}"></p>
+					<p th:text="${'Name: ' + work.job.name + ', Category: ' + work.job.category}"></p>
+					<p th:text="${'Description: ' + work.job.description}"></p>
+				</td>
 			</tr>
 			<tr>
 				<td> Work Salary: </td>
