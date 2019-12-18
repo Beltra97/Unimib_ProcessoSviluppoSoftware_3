@@ -26,7 +26,7 @@ public class WorkController {
   }
 
   @GetMapping("/works")
-  public ModelAndView companies() {
+  public ModelAndView works() {
     ModelAndView modelAndView = new ModelAndView();
 
     Iterable<Work> work = workRepository.findAll();
@@ -38,7 +38,7 @@ public class WorkController {
   }
 
   @GetMapping("/works/{id}")
-  public ModelAndView user(@PathVariable("id") Long id) {
+  public ModelAndView work(@PathVariable("id") Long id) {
     ModelAndView modelAndView = new ModelAndView();
 
     Optional<Work> work = workRepository.findById(id);
@@ -73,7 +73,7 @@ public class WorkController {
   }
   
   @PostMapping("works/updatework{id}")
-  public String userUpdate(@PathVariable("id") Long id, @RequestParam(value="updateSalary") Integer salary, @RequestParam(value="updateStartDate") String startDate, @RequestParam(value="updateEndDate") String endDate) {
+  public String workUpdate(@PathVariable("id") Long id, @RequestParam(value="updateSalary") Integer salary, @RequestParam(value="updateStartDate") String startDate, @RequestParam(value="updateEndDate") String endDate) {
 
 	workRepository.updateWork(id, salary, startDate, endDate);
 	

@@ -15,7 +15,7 @@
 			</tr>
 			<tr th:each="user : ${users}"> 
 				<td width="100" align="center"> <a th:href="@{users/{id}(id = ${user.id})}" th:text="${user.lastName}"></a> </td>
-				<td width="100" align="center"> <a th:href="@{deleteuser{id}(id=${user.id})}">Delete</a> </td>
+				<td width="100" align="center"> <a th:href="@{deleteuser/{id}(id=${user.id})}">Delete</a> </td>
 			</tr>
 		</table>
 		<br>

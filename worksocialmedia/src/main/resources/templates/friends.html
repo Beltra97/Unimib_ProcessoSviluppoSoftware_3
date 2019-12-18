@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>FRIENDS HOME PAGE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		-------- LIST OF ALL FRIENDS -------- 
+		<br>
+		<table border="1">
+			<tr>
+				<th> Friendship Id </th>
+				<th>  </th>
+			</tr>
+			<tr th:each="friend : ${friends}"> 
+				<td width="100" align="center"> <a th:href="@{friends/{id}(id = ${friend.id})}" th:text="${friend.id}"></a> </td>
+				<td width="100" align="center"> <a th:href="@{deletefriend{id}(id=${friend.id})}">Delete</a> </td>
+			</tr>
+		</table>
+		<br>
+		Click a friend to view friend details
+		<br><br>
+		--------- ADD A NEW FRIENDSHIP ---------
+		<br>
+		<form action="#" th:action="@{addfriend}" th:object="${friend}" method="post">
+	    	<p>First User Id: <input type="text" name="addUser1"/></p>
+	        <p>Second User Id: <input type="text" name="addUser2" /></p>
+	        <p>Creation Date: <input type="text" name="addCreationDate" /></p>
+	        <p><input type="submit" value="Add a new friendship" /> <input type="reset" value="Clean values" /></p>
+	    </form>
+	    <br><br>
+	    --------- SEARCH A FRIENDSHIP BY DATE ---------
+		<br>
+		<form action="#" th:action="@{searchfriend}" th:object="${friend}" method="post">
+	    	<p>Creation Friendship Date: <input type="text" name="friendSearchDate"/></p>
+	        <p><input type="submit" value="Search friendship" /></p>
+	    </form>
+	    <br><br>
+	    <a href="http://localhost:8080">Return to entities list</a>
+	</div>
+</body>
+</html>

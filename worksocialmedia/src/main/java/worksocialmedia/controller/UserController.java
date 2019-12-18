@@ -3,14 +3,16 @@ package worksocialmedia.controller;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import worksocialmedia.exception.UserNotFoundException;
-import worksocialmedia.model.Job;
 import worksocialmedia.model.User;
 import worksocialmedia.repository.UserRepository;
 import worksocialmedia.repository.UserRepositoryImpl;
@@ -48,7 +50,7 @@ public class UserController {
     return modelAndView;
   }
   
-  @GetMapping("deleteuser{id}")
+  @GetMapping("deleteuser/{id}")
   public String userDelete(@PathVariable("id") Long id) {
 	  
     userRepository.deleteUserById(id);

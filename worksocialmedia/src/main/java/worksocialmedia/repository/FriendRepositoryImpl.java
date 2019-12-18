@@ -7,25 +7,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import worksocialmedia.model.Company;
-import worksocialmedia.model.Job;
+import worksocialmedia.model.Friend;
 import worksocialmedia.model.User;
-import worksocialmedia.model.Work;
 
-public class WorkRepositoryImpl implements WorkRepository {
+public class FriendRepositoryImpl implements FriendRepository {
 
   private EntityManagerFactory entityManagerFactory;
 
-  public WorkRepositoryImpl() {
+  public FriendRepositoryImpl() {
     this.entityManagerFactory = Persistence.createEntityManagerFactory("worksocialmedia");
   }
 
   @Override
-  public Optional<Work> findById(Long id) {
+  public Optional<Friend> findById(Long id) {
     final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-    Work work = entityManager.find(Work.class, id);
+    Friend friend = entityManager.find(Friend.class, id);
     entityManager.close();
-    return Optional.ofNullable(work);
+    return Optional.ofNullable(friend);
   }
   
   public Optional<User> findUserById(Long id) {
@@ -34,72 +32,56 @@ public class WorkRepositoryImpl implements WorkRepository {
 	    entityManager.close();
 	    return Optional.ofNullable(user);
   }
-  
-  public Optional<Company> findCompanyById(Long id) {
-	    final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-	    Company company = entityManager.find(Company.class, id);
-	    entityManager.close();
-	    return Optional.ofNullable(company);
-  }
-  
-  public Optional<Job> findJobById(Long id) {
-	    final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-	    Job job = entityManager.find(Job.class, id);
-	    entityManager.close();
-	    return Optional.ofNullable(job);
-  }
 
   @Override
-  public Iterable<Work> findAll() {
+  public Iterable<Friend> findAll() {
     final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-    List<Work> works = entityManager.createQuery("FROM Work", Work.class).getResultList();
+    List<Friend> friends = entityManager.createQuery("FROM Friend", Friend.class).getResultList();
     entityManager.close();
-    return works;
+    return friends;
   }
   
-  public void deleteWorkById(Long id) {
+  public void deleteFriendById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		if (!entityManager.getTransaction().isActive()) {
 			entityManager.getTransaction().begin();
 		}
-		Work work = entityManager.find(Work.class, id);
-		entityManager.remove(work);
+		Friend friend = entityManager.find(Friend.class, id);
+		entityManager.remove(friend);
 		entityManager.getTransaction().commit();
 		entityManager.close();
-  }
+	  }
   
-  public void addWork(Work work) {
+  public void addFriend(Friend friend) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		if (!entityManager.getTransaction().isActive()) {
 			entityManager.getTransaction().begin();
 		}
-		entityManager.persist(work);	
+		entityManager.persist(friend);	
 		entityManager.getTransaction().commit();
 		entityManager.close();
-  }
+	  }
   
-  public void updateWork(Long id, Integer salary, String startDate, String endDate) {
+  public void updateFriend(Long id, String creationDate) {
 	  final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		if (!entityManager.getTransaction().isActive()) {
 			entityManager.getTransaction().begin();
 		}
-		Work work = entityManager.find(Work.class, id);
-		work.setSalary(salary);
-		work.setStartDate(startDate);
-		work.setEndDate(endDate);
-		entityManager.persist(work);
+		Friend friend = entityManager.find(Friend.class, id);
+		friend.setCreationDate(creationDate);
+		entityManager.persist(friend);
 		entityManager.getTransaction().commit();
 		entityManager.close();
   }
   
-  public Work searchWork(Integer workSearchSalary) {
+  public Friend searchFriend(String friendSearchDate) {
 	  final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 	  
-		Work work = (Work) entityManager.createQuery("FROM Work w WHERE w.salary = '" + workSearchSalary + "'").getSingleResult();
+	  	Friend friend = (Friend) entityManager.createQuery("FROM Friend f WHERE f.creationDate = '" + friendSearchDate + "'").getSingleResult();
 
 		entityManager.close();
 		  
-		return work;
+		return friend;
   }
 
 }
