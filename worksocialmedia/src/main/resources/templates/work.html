@@ -12,7 +12,7 @@
 			<table>
 			<tr>
 				<td> Work Id: </td>
-				<td> <p th:value="${work.id}" th:text="${work.id}"> </p> </td>
+				<td> <p th:value="${work.id}" th:text="${work.id}" /> </td>
 			</tr>
 			<tr>
 				<td> User details: </td>
@@ -55,6 +55,7 @@
 				<td> <Input type="text" name="updateEndDate" th:value="${work.endDate}" size="10" /> </td>
 			</tr>
 			</table>
+			<br>
 			<input type="submit" value="Update work">
 		</form>	
 					

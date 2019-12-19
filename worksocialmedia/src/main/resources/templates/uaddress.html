@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title> USER ADDRESS DETAILS </title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		USER ADDRESS DETAILS: <br><br>
+		
+		<form action="#" th:action="@{http://localhost:8080/uaddresses/updateuaddress{id}(id = ${uaddress.id})}" th:object="${uaddress}" method="post">
+			<table>
+			<tr>
+				<td> User Address Id: </td>
+				<td> <p th:value="${uaddress.id}" th:text="${uaddress.id}" /> </td>
+			</tr>
+			<tr>
+				<td> User Address Street: </td>
+				<td> <Input type="text" name="updateStreet" th:value="${uaddress.street}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> User Address Civic Number: </td>
+				<td> <Input type="text" name="updateCivicNumber" th:value="${uaddress.civicNumber}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> User Address Postal Code: </td>
+				<td> <Input type="text" name="updatePostalCode" th:value="${uaddress.postalCode}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> User Address Municipality: </td>
+				<td> <Input type="text" name="updateMunicipality" th:value="${uaddress.municipality}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> User Address Nation: </td>
+				<td> <Input type="text" name="updateNation" th:value="${uaddress.nation}" size="10" /> </td>
+			</tr>
+			</table>
+			<br>
+			<input type="submit" value="Update user address">
+		</form>	
+					
+		<br>
+		<a href="http://localhost:8080/uaddresses">Return to user addresses list</a>
+	</div>
+</body>
+</html>

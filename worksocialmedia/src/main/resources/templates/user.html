@@ -12,7 +12,7 @@
 			<table>
 			<tr>
 				<td> User Id: </td>
-				<td> <Input type="text" th:value="${user.id}" size="1" readonly /> </td>
+				<td> <p th:value="${user.id}" th:text="${user.id}" /> </td>
 			</tr>
 			<tr>
 				<td> User First Name: </td>
@@ -31,6 +31,7 @@
 				<td> <Input type="text" name="updateBirthDate" th:value="${user.birthDate}" size="10" /> </td>
 			</tr>
 			</table>
+			<br>
 			<input type="submit" value="Update user">
 		</form>	
 					

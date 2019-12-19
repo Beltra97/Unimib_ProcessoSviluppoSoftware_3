@@ -12,7 +12,7 @@
 			<table>
 			<tr>
 				<td> Job Id: </td>
-				<td> <Input type="text" th:value="${job.id}" size="1" readonly /> </td>
+				<td> <p th:value="${job.id}" th:text="${job.id}" /> </td>
 			</tr>
 			<tr>
 				<td> Job Name: </td>
@@ -27,6 +27,7 @@
 				<td> <Input type="text" name="updateDescription" th:value="${job.description}" size="10" /> </td>
 			</tr>
 			</table>
+			<br>
 			<input type="submit" value="Update job">
 		</form>	
 					

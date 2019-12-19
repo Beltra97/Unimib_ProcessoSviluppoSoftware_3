@@ -12,7 +12,7 @@
 			<table>
 			<tr>
 				<td> Company Id: </td>
-				<td> <Input type="text" th:value="${company.id}" size="1" readonly /> </td>
+				<td> <p th:value="${company.id}" th:text="${company.id}" /> </td>
 			</tr>
 			<tr>
 				<td> Company Name: </td>
@@ -35,6 +35,7 @@
 				<td> <Input type="text" name="updateDescription" th:value="${company.description}" size="10" /> </td>
 			</tr>
 			</table>
+			<br>
 			<input type="submit" value="Update company">
 		</form>	
 					
