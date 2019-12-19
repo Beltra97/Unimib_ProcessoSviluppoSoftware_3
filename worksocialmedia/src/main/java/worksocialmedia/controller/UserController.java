@@ -3,16 +3,14 @@ package worksocialmedia.controller;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import worksocialmedia.exception.UserNotFoundException;
+import worksocialmedia.model.AddressUser;
 import worksocialmedia.model.User;
 import worksocialmedia.repository.UserRepository;
 import worksocialmedia.repository.UserRepositoryImpl;
@@ -60,9 +58,10 @@ public class UserController {
   }
   
   @PostMapping("adduser")
-  public String userAdd(@RequestParam(value="addFirstName") String firstName, @RequestParam(value="addLastName") String lastName, @RequestParam(value="addGender") String gender, @RequestParam(value="addBirthDate") String birthDate) {
+  public String userAdd(@RequestParam(value="addFirstName") String firstName, @RequestParam(value="addLastName") String lastName, @RequestParam(value="addGender") String gender, @RequestParam(value="addBirthDate") String birthDate, @RequestParam(value="addResidentialAddressId") Long userAddressId) {
 
-	User user = new User(firstName, lastName, gender, birthDate);
+	Optional<AddressUser> addressUser = userRepository.findUserAddressById(userAddressId);
+	User user = new User(firstName, lastName, gender, birthDate, addressUser.get());
 	  
 	userRepository.addUser(user);
 	

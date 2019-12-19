@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import worksocialmedia.model.AddressUser;
 import worksocialmedia.model.User;
 
 public class UserRepositoryImpl implements UserRepository {
@@ -26,6 +27,13 @@ public class UserRepositoryImpl implements UserRepository {
     User user = entityManager.find(User.class, id);
     entityManager.close();
     return Optional.ofNullable(user);
+  }
+  
+  public Optional<AddressUser> findUserAddressById(Long id) {
+	    final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+	    AddressUser addressUser = entityManager.find(AddressUser.class, id);
+	    entityManager.close();
+	    return Optional.ofNullable(addressUser);
   }
 
   @Override

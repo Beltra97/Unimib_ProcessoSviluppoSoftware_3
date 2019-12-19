@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div>
-		USER DETAILS: <br><br>
+		<h3>USER DETAILS:</h3>
 		
 		<form action="#" th:action="@{http://localhost:8080/users/updateuser{id}(id = ${user.id})}" th:object="${user}" method="post">
 			<table>
@@ -29,6 +29,14 @@
 			<tr>
 				<td> User Birth Date: </td>
 				<td> <Input type="text" name="updateBirthDate" th:value="${user.birthDate}" size="10" /> </td>
+			</tr>
+			<tr>
+				<td> User Address details: </td>
+				<td> 
+					<p th:name="updateAddressUserId" th:value="${user.residentialAddress.id}" th:text="${'Address User ID: ' + user.residentialAddress.id}"></p>
+					<p th:text="${user.residentialAddress.street + ', ' + user.residentialAddress.civicNumber}"></p>
+					<p th:text="${user.residentialAddress.postalCode + ', ' + user.residentialAddress.municipality + ', ' + user.residentialAddress.nation}"></p>
+				</td>
 			</tr>
 			</table>
 			<br>

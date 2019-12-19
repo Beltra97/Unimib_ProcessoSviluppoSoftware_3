@@ -1,13 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>USERS</title>
+<title>USERS HOME PAGE</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div>
+		<h2>USERS HOME PAGE</h2>
 		-------- LIST OF ALL USERS -------- 
-		<br>
+		<br><br>
 		<table border="1">
 			<tr>
 				<th> User Last Name </th>
@@ -20,7 +21,7 @@
 		</table>
 		<br>
 		Click a user to view user details
-		<br><br>
+		<br><br><br>
 		--------- ADD A NEW USER ---------
 		<br>
 		<form action="#" th:action="@{adduser}" th:object="${user}" method="post">
@@ -28,6 +29,7 @@
 	    	<p>Last Name: <input type="text" name="addLastName"/></p>
 	        <p>Gender: <input type="text" name="addGender"/></p>
 	        <p>Birth Date: <input type="text" name="addBirthDate"/></p>
+	        <p>User Address Id: <input type="text" name="addResidentialAddressId"/></p>
 	        <p><input type="submit" value="Add a new user" /> <input type="reset" value="Clean values" /></p>
 	    </form>
 	    <br><br>

@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div>
-		JOB DETAILS: <br><br>
+		<h3>JOB DETAILS:</h3>
 		
 		<form action="#" th:action="@{http://localhost:8080/jobs/updatejob{id}(id = ${job.id})}" th:object="${job}" method="post">
 			<table>

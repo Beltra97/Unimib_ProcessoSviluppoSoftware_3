@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>COMPANY ADDRESSES HOME PAGE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<h2>COMPANY ADDRESSES HOME PAGE</h2>
+		-------- LIST OF ALL COMPANY ADDRESSES -------- 
+		<br><br>
+		<table border="1">
+			<tr>
+				<th> Company Address Street Name </th>
+				<th>  </th>
+			</tr>
+			<tr th:each="caddress : ${caddresses}"> 
+				<td width="100" align="center"> <a th:href="@{caddresses/{id}(id = ${caddress.id})}" th:text="${caddress.street}"></a> </td>
+				<td width="100" align="center"> <a th:href="@{deletecaddress{id}(id=${caddress.id})}">Delete</a> </td>
+			</tr>
+		</table>
+		<br>
+		Click a company address to view company address details
+		<br><br><br>
+		--------- ADD A NEW COMPANY ADDRESS ---------
+		<br>
+		<form action="#" th:action="@{addcaddress}" th:object="${caddress}" method="post">
+	    	<p>Street: <input type="text" name="addStreet"/></p>
+	        <p>Civic Number: <input type="text" name="addCivicNumber" /></p>
+	        <p>Postal Code: <input type="text" name="addPostalCode" /></p>
+	        <p>Municipality: <input type="text" name="addMunicipality" /></p>
+	        <p>Nation: <input type="text" name="addNation" /></p>
+	        <p><input type="submit" value="Add a new company address" /> <input type="reset" value="Clean values" /></p>
+	    </form>
+	    <br><br>
+	    --------- SEARCH A COMPANY ADDRESS BY STREET ---------
+		<br>
+		<form action="#" th:action="@{searchcaddress}" th:object="${caddress}" method="post">
+	    	<p>Street: <input type="text" name="jobSearchNameStreet"/></p>
+	        <p><input type="submit" value="Search company address" /></p>
+	    </form>
+	    <br><br>
+	    <a href="http://localhost:8080">Return to entities list</a>
+	</div>
+</body>
+</html>

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,21 +42,26 @@ public class User implements Serializable {
   
   @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL) 
   private List<Friend> Friends2;
+  
+  @ManyToOne
+  @JoinColumn(name="residential_address") 
+  private AddressUser residentialAddress;
 	 
   
   protected User() {
   }
 
-  public User(String firstName, String lastName, String gender, String birthDate) {
+  public User(String firstName, String lastName, String gender, String birthDate, AddressUser residentialAddress) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.gender = gender;
     this.birthDate = birthDate;
+    this.residentialAddress = residentialAddress;
   }
 
   @Override
   public String toString() {
-    return String.format("User[id=%d, firstName='%s', lastName='%s', gender='%s', birthDate='%s']", id, firstName, lastName, gender, birthDate);
+    return String.format("User[id=%d, firstName='%s', lastName='%s', gender='%s', birthDate='%s', residentialAddress=%d]", id, firstName, lastName, gender, birthDate, residentialAddress);
   }
 
   public Long getId() {
@@ -77,6 +84,10 @@ public class User implements Serializable {
 	    return birthDate;
   }
   
+  public AddressUser getResidentialAddress() {
+	    return residentialAddress;
+  }
+  
   public void setFirstName(String firstName){
 	    this.firstName = firstName;
   }
@@ -91,6 +102,10 @@ public class User implements Serializable {
   
   public void setBirthDate(String birthDate){
 	    this.birthDate = birthDate;
+  }
+  
+  public void setResidentialAddress(AddressUser residentialAddress){
+	    this.residentialAddress = residentialAddress;
   }
 
 }

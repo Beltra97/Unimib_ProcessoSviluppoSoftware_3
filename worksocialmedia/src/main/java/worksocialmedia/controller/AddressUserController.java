@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import worksocialmedia.exception.AddressUserNotFoundException;
-import worksocialmedia.model.Address;
 import worksocialmedia.model.AddressUser;
 import worksocialmedia.repository.AddressUserRepository;
 import worksocialmedia.repository.AddressUserRepositoryImpl;

@@ -1,8 +1,13 @@
 package worksocialmedia.repository;
 
+import java.util.Optional;
+
+import worksocialmedia.model.AddressUser;
 import worksocialmedia.model.User;
 
 public interface UserRepository extends Repository<User, Long>{
+	
+	public Optional<AddressUser> findUserAddressById(Long id);
 
 	public void deleteUserById(Long id);
 
