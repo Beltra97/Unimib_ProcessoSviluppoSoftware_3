@@ -25,8 +25,18 @@
 		--------- ADD A NEW FRIENDSHIP ---------
 		<br>
 		<form action="#" th:action="@{addfriend}" th:object="${friend}" method="post">
-	    	<p>First User Id: <input type="text" name="addUser1"/></p>
-	        <p>Second User Id: <input type="text" name="addUser2" /></p>
+	    	<p>First User: 
+	    	<select th:name="addUser1">
+	        	<option> --- </option>
+	        	<option th:each="user : ${users}" th:text="${user.id + ' - ' + user.firstName + ' ' + user.lastName}" th:value="${user.id}"> </option>
+	        </select>
+	    	</p>
+	        <p>Second User: 
+	        <select th:name="addUser2">
+	        	<option> --- </option>
+	        	<option th:each="user : ${users}" th:text="${user.id + ' - ' + user.firstName + ' '+ user.lastName}" th:value="${user.id}"> </option>
+	        </select>
+	        </p>
 	        <p>Creation Date: <input type="text" name="addCreationDate" /></p>
 	        <p><input type="submit" value="Add a new friendship" /> <input type="reset" value="Clean values" /></p>
 	    </form>

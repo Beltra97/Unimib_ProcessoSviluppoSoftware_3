@@ -14,21 +14,48 @@ import worksocialmedia.model.Company;
 import worksocialmedia.model.Job;
 import worksocialmedia.model.User;
 import worksocialmedia.model.Work;
+import worksocialmedia.repository.CompanyRepository;
+import worksocialmedia.repository.CompanyRepositoryImpl;
+import worksocialmedia.repository.JobRepository;
+import worksocialmedia.repository.JobRepositoryImpl;
+import worksocialmedia.repository.UserRepository;
+import worksocialmedia.repository.UserRepositoryImpl;
 import worksocialmedia.repository.WorkRepository;
 import worksocialmedia.repository.WorkRepositoryImpl;
 
 @Controller
 public class WorkController {
   private WorkRepository workRepository;
+  private UserRepository userRepository;
+  private JobRepository jobRepository;
+  private CompanyRepository companyRepository;
 
   public WorkController() {
     this.workRepository = new WorkRepositoryImpl();
+    this.userRepository = new UserRepositoryImpl();
+    this.jobRepository = new JobRepositoryImpl();
+    this.companyRepository = new CompanyRepositoryImpl();
   }
 
   @GetMapping("/works")
   public ModelAndView works() {
     ModelAndView modelAndView = new ModelAndView();
 
+    Iterable<User> users = userRepository.findAll();
+    
+    modelAndView.addObject("users", users);
+    modelAndView.setViewName("users");
+    
+    Iterable<Job> jobs = jobRepository.findAll();
+
+    modelAndView.addObject("jobs", jobs);
+    modelAndView.setViewName("jobs");
+    
+    Iterable<Company> company = companyRepository.findAll();
+
+    modelAndView.addObject("companies", company);
+    modelAndView.setViewName("companies");
+    
     Iterable<Work> work = workRepository.findAll();
 
     modelAndView.addObject("works", work);

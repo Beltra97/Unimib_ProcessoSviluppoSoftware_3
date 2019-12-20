@@ -14,19 +14,28 @@ import worksocialmedia.model.Friend;
 import worksocialmedia.model.User;
 import worksocialmedia.repository.FriendRepository;
 import worksocialmedia.repository.FriendRepositoryImpl;
+import worksocialmedia.repository.UserRepository;
+import worksocialmedia.repository.UserRepositoryImpl;
 
 @Controller
 public class FriendController {
   private FriendRepository friendRepository;
+  private UserRepository userRepository;
 
   public FriendController() {
     this.friendRepository = new FriendRepositoryImpl();
+    this.userRepository = new UserRepositoryImpl();
   }
 
   @GetMapping("/friends")
   public ModelAndView friends() {
     ModelAndView modelAndView = new ModelAndView();
 
+    Iterable<User> users = userRepository.findAll();
+    
+    modelAndView.addObject("users", users);
+    modelAndView.setViewName("users");
+    
     Iterable<Friend> friend = friendRepository.findAll();
 
     modelAndView.addObject("friends", friend);

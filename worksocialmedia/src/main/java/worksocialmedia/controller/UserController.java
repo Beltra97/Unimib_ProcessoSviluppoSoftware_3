@@ -13,26 +13,35 @@ import worksocialmedia.exception.UserNotFoundException;
 import worksocialmedia.model.AddressUser;
 import worksocialmedia.model.User;
 import worksocialmedia.repository.UserRepository;
+import worksocialmedia.repository.AddressUserRepository;
 import worksocialmedia.repository.UserRepositoryImpl;
+import worksocialmedia.repository.AddressUserRepositoryImpl;
 
 
 @Controller
 public class UserController {
   private UserRepository userRepository;
+  private AddressUserRepository addressUserRepository;
 
   public UserController() {
     this.userRepository = new UserRepositoryImpl();
+    this.addressUserRepository = new AddressUserRepositoryImpl();
   }
 
   @GetMapping("/users")
   public ModelAndView users() {
     ModelAndView modelAndView = new ModelAndView();
 
+    Iterable<AddressUser> addressesUser = addressUserRepository.findAll();
+
+    modelAndView.addObject("uaddresses", addressesUser);
+    modelAndView.setViewName("uaddresses");
+    
     Iterable<User> users = userRepository.findAll();
     
     modelAndView.addObject("users", users);
     modelAndView.setViewName("users");
-
+    
     return modelAndView;
   }
   

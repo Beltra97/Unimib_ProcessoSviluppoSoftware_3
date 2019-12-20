@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
+	<div align="center">
 		<h2>COMPANIES HOME PAGE</h2>
-		-------- LIST OF ALL COMPANIES -------- 
+		------------ LIST OF ALL COMPANIES ------------ 
 		<br><br>
 		<table border="1">
 			<tr>
@@ -22,19 +22,45 @@
 		<br>
 		Click a company to view company details
 		<br><br><br>
-		--------- ADD A NEW COMPANY ---------
+		------------ ADD A NEW COMPANY ------------
 		<br>
 		<form action="#" th:action="@{addcompany}" th:object="${company}" method="post">
-	    	<p>Name: <input type="text" name="addName"/></p>
-	        <p>CEO: <input type="text" name="addCEO" /></p>
-	        <p>Number of Employees: <input type="text" name="addNumberEmployees" /></p>
-	        <p>Year of Foundation: <input type="text" name="addFoundationYear" /></p>
-	        <p>Description: <input type="text" name="addDescription" /></p>
-	        <p>Company Address Id: <input type="text" name="addLegalAddressId"/></p>
-	        <p><input type="submit" value="Add a new company" /> <input type="reset" value="Clean values" /></p>
+			<table>
+				<tr>
+					<td><p>Name:</p></td>
+					<td><input type="text" name="addName" /></td>
+				</tr>
+				<tr>
+					<td><p>CEO:</p></td>
+					<td><input type="text" name="addCEO" /></td>
+				</tr>
+				<tr>
+					<td><p>Number of Employees:</p></td>
+					<td><input type="number" name="addNumberEmployees" /></td>
+				</tr>
+				<tr>
+					<td><p>Year of Foundation:</p></td>
+					<td><input type="text" name="addFoundationYear" /></td>
+				</tr>
+				<tr>
+					<td><p>Description:</p></td>
+					<td><textarea name="addDescription" cols="30" rows="5"> </textarea></td>
+				</tr>
+				<tr>
+					<td><p>Company Address:</p></td>
+					<td> 
+						<select th:name="addLegalAddressId">
+				        	<option> --- </option>
+				        	<option th:each="caddress : ${caddresses}" th:text="${caddress.id + ' - ' + caddress.street + ', ' + caddress.municipality}" th:value="${caddress.id}"> </option>
+	        			</select>	
+					</td>
+				</tr>
+	    	 </table>
+	        <br>
+	        <input type="submit" value="Add a new company" /> <input type="reset" value="Clean values" />
 	    </form>
 	    <br><br>
-	    --------- SEARCH A COMPANY BY NAME ---------
+	    ------------ SEARCH A COMPANY BY NAME ------------
 		<br>
 		<form action="#" th:action="@{searchcompany}" th:object="${company}" method="post">
 	    	<p>Name: <input type="text" name="companySearchName"/></p>

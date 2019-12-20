@@ -12,21 +12,30 @@ import org.springframework.web.servlet.ModelAndView;
 import worksocialmedia.exception.CompanyNotFoundException;
 import worksocialmedia.model.AddressCompany;
 import worksocialmedia.model.Company;
+import worksocialmedia.repository.AddressCompanyRepository;
+import worksocialmedia.repository.AddressCompanyRepositoryImpl;
 import worksocialmedia.repository.CompanyRepository;
 import worksocialmedia.repository.CompanyRepositoryImpl;
 
 @Controller
 public class CompanyController {
   private CompanyRepository companyRepository;
+  private AddressCompanyRepository addressCompanyRepository;
 
   public CompanyController() {
     this.companyRepository = new CompanyRepositoryImpl();
+    this.addressCompanyRepository = new AddressCompanyRepositoryImpl();
   }
 
   @GetMapping("/companies")
   public ModelAndView companies() {
     ModelAndView modelAndView = new ModelAndView();
 
+    Iterable<AddressCompany> addressesCompany = addressCompanyRepository.findAll();
+
+    modelAndView.addObject("caddresses", addressesCompany);
+    modelAndView.setViewName("caddresses");
+    
     Iterable<Company> company = companyRepository.findAll();
 
     modelAndView.addObject("companies", company);

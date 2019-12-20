@@ -17,7 +17,6 @@
 			<tr>
 				<td> First User details: </td>
 				<td> 
-					<!--  <Input type="text" name="updateUser" th:value="${work.user.id}" size="10" readonly/> -->
 					<p th:name="updateUser1Id" th:value="${friend.user1.id}" th:text="${'User ID: ' + friend.user1.id}"></p>
 					<p th:text="${'First name: ' + friend.user1.firstName + ', Last name: ' + friend.user1.lastName}"></p>
 					<p th:text="${'Gender: ' + friend.user1.gender + ', Birth date: ' + friend.user1.birthDate}"></p>
@@ -26,7 +25,6 @@
 			<tr>
 				<td> Second User details: </td>
 				<td> 
-					<!--  <Input type="text" name="updateUser" th:value="${work.user.id}" size="10" readonly/> -->
 					<p th:name="updateUser2Id" th:value="${friend.user2.id}" th:text="${'User ID: ' + friend.user2.id}"></p>
 					<p th:text="${'First name: ' + friend.user2.firstName + ', Last name: ' + friend.user2.lastName}"></p>
 					<p th:text="${'Gender: ' + friend.user2.gender + ', Birth date: ' + friend.user2.birthDate}"></p>
@@ -42,7 +40,7 @@
 		</form>	
 					
 		<br>
-		<a href="http://localhost:8080/friends">Return to frienships list</a>
+		<a href="http://localhost:8080/friends">Return to friendships list</a>
 	</div>
 </body>
 </html>
