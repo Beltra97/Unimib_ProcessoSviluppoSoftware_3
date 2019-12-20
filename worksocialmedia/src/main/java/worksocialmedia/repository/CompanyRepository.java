@@ -1,8 +1,13 @@
 package worksocialmedia.repository;
 
+import java.util.Optional;
+
+import worksocialmedia.model.AddressCompany;
 import worksocialmedia.model.Company;
 
 public interface CompanyRepository extends Repository<Company, Long>{
+	
+	public Optional<AddressCompany> findCompanyAddressById(Long id);
 
 	public void deleteCompanyById(Long id);
 

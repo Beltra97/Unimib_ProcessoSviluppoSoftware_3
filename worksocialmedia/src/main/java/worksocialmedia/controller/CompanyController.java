@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import worksocialmedia.exception.CompanyNotFoundException;
+import worksocialmedia.model.AddressCompany;
 import worksocialmedia.model.Company;
 import worksocialmedia.repository.CompanyRepository;
 import worksocialmedia.repository.CompanyRepositoryImpl;
@@ -57,9 +58,10 @@ public class CompanyController {
   }
   
   @PostMapping("addcompany")
-  public String companyAdd(@RequestParam(value="addName") String name, @RequestParam(value="addCEO") String CEO, @RequestParam(value="addNumberEmployees") Integer numberEmployees, @RequestParam(value="addFoundationYear") String foundationYear, @RequestParam(value="addDescription") String description) {
+  public String companyAdd(@RequestParam(value="addName") String name, @RequestParam(value="addCEO") String CEO, @RequestParam(value="addNumberEmployees") Integer numberEmployees, @RequestParam(value="addFoundationYear") String foundationYear, @RequestParam(value="addDescription") String description, @RequestParam(value="addLegalAddressId") Long companyAddressId) {
 
-	Company company = new Company(name, CEO, numberEmployees, foundationYear, description);
+	Optional<AddressCompany> addressCompany = companyRepository.findCompanyAddressById(companyAddressId);
+	Company company = new Company(name, CEO, numberEmployees, foundationYear, description, addressCompany.get());
 	  
 	companyRepository.addCompany(company);
 	

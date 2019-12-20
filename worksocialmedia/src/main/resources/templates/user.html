@@ -33,7 +33,7 @@
 			<tr>
 				<td> User Address details: </td>
 				<td> 
-					<p th:name="updateAddressUserId" th:value="${user.residentialAddress.id}" th:text="${'Address User ID: ' + user.residentialAddress.id}"></p>
+					<p th:name="updateAddressUserId" th:value="${user.residentialAddress.id}" th:text="${'User Address ID: ' + user.residentialAddress.id}"></p>
 					<p th:text="${user.residentialAddress.street + ', ' + user.residentialAddress.civicNumber}"></p>
 					<p th:text="${user.residentialAddress.postalCode + ', ' + user.residentialAddress.municipality + ', ' + user.residentialAddress.nation}"></p>
 				</td>

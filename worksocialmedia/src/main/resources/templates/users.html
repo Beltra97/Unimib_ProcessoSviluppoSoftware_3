@@ -30,6 +30,11 @@
 	        <p>Gender: <input type="text" name="addGender"/></p>
 	        <p>Birth Date: <input type="text" name="addBirthDate"/></p>
 	        <p>User Address Id: <input type="text" name="addResidentialAddressId"/></p>
+	        <table border="1">
+	        	<tr th:each="user : ${users}"> 
+	        		<td> <p th:text="${user.residentialAddress.id}" th:value="${user.residentialAddress.id}"> </p> </td>
+	        	</tr>
+	        </table>	
 	        <p><input type="submit" value="Add a new user" /> <input type="reset" value="Clean values" /></p>
 	    </form>
 	    <br><br>

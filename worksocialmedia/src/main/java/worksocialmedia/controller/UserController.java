@@ -15,6 +15,7 @@ import worksocialmedia.model.User;
 import worksocialmedia.repository.UserRepository;
 import worksocialmedia.repository.UserRepositoryImpl;
 
+
 @Controller
 public class UserController {
   private UserRepository userRepository;
@@ -28,12 +29,13 @@ public class UserController {
     ModelAndView modelAndView = new ModelAndView();
 
     Iterable<User> users = userRepository.findAll();
-
+    
     modelAndView.addObject("users", users);
     modelAndView.setViewName("users");
 
     return modelAndView;
   }
+  
 
   @GetMapping("/users/{id}")
   public ModelAndView user(@PathVariable("id") Long id) {

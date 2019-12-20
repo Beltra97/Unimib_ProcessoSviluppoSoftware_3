@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,23 +35,30 @@ public class Company implements Serializable {
   @Column(name = "description", nullable = true)
   private String description;
   
+  
   @OneToMany(mappedBy = "company", cascade = CascadeType.ALL) 
   private List<Work> works;
+  
+  @ManyToOne
+  @JoinColumn(name="legal_address") 
+  private AddressCompany legalAddress;
+  
   
   protected Company() {
   }
 
-  public Company(String name, String CEO, Integer numberEmployees, String foundationYear, String description) {
+  public Company(String name, String CEO, Integer numberEmployees, String foundationYear, String description, AddressCompany legalAddress) {
     this.name = name;
     this.CEO = CEO;
     this.numberEmployees = numberEmployees;
     this.foundationYear = foundationYear;
     this.description = description;
+    this.legalAddress = legalAddress;
   }
 
   @Override
   public String toString() {
-    return String.format("User[id=%d, name='%s', CEO='%s', numberEmployees='%d', foundationYear='%s', description='%s']", id, name, CEO, numberEmployees, foundationYear, description);
+    return String.format("User[id=%d, name='%s', CEO='%s', numberEmployees='%d', foundationYear='%s', description='%s', legalAddress='%d']", id, name, CEO, numberEmployees, foundationYear, description, legalAddress);
   }
 
   public Long getId() {
@@ -74,7 +83,11 @@ public class Company implements Serializable {
   
   public String getDescription() {
 	    return description;
-}
+  }
+  
+  public AddressCompany getLegalAddress() {
+	    return legalAddress;
+  }
   
   public void setName(String name){
 	    this.name = name;
@@ -94,6 +107,10 @@ public class Company implements Serializable {
   
   public void setDescription(String description){
 	    this.description = description;
+  }
+  
+  public void setLegalAddress(AddressCompany legalAddress){
+	  this.legalAddress = legalAddress;
   }
 
 }

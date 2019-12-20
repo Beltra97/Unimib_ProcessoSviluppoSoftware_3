@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import worksocialmedia.model.AddressCompany;
 import worksocialmedia.model.Company;
 
 public class CompanyRepositoryImpl implements CompanyRepository {
@@ -23,6 +24,13 @@ public class CompanyRepositoryImpl implements CompanyRepository {
     Company company = entityManager.find(Company.class, id);
     entityManager.close();
     return Optional.ofNullable(company);
+  }
+  
+  public Optional<AddressCompany> findCompanyAddressById(Long id) {
+	    final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+	    AddressCompany addressCompany = entityManager.find(AddressCompany.class, id);
+	    entityManager.close();
+	    return Optional.ofNullable(addressCompany);
   }
 
   @Override
