@@ -1,63 +1,90 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title> WORK DETAILS </title>
+<title>WORK DETAILS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
+	<div align="center">
 		<h3>WORK DETAILS:</h3>
-		
-		<form action="#" th:action="@{http://localhost:8080/works/updatework{id}(id = ${work.id})}" th:object="${work}" method="post">
+		<form action="#"
+			th:action="@{http://localhost:8080/works/updatework{id}(id = ${work.id})}"
+			th:object="${work}" method="post">
 			<table>
-			<tr>
-				<td> Work Id: </td>
-				<td> <p th:value="${work.id}" th:text="${work.id}" /> </td>
-			</tr>
-			<tr>
-				<td> User details: </td>
-				<td> 
-					<p th:name="updateUserId" th:value="${work.user.id}" th:text="${'User ID: ' + work.user.id}"></p>
-					<p th:text="${'First name: ' + work.user.firstName + ', Last name: ' + work.user.lastName}"></p>
-					<p th:text="${'Gender: ' + work.user.gender + ', Birth date: ' + work.user.birthDate}"></p>
-				</td>
-			</tr>
-			<tr>
-				<td> Company details: </td>
-				<td> 
-					<p th:name="updateCompanyId" th:value="${work.company.id}" th:text="${'Company ID: ' + work.company.id}"></p>
-					<p th:text="${'Name: ' + work.company.name + ', Ceo: ' + work.company.CEO}"></p>
-					<p th:text="${'Number of employees: ' + work.company.numberEmployees + ', Foundation year: ' + work.company.foundationYear}"></p> 
-					<p th:text="${'Description: ' + work.company.description}"></p> 
-				</td>
-			</tr>
-			<tr>
-				<td> Job Type details: </td>
-				<td> 
-					<p th:name="updateJobId" th:value="${work.job.id}" th:text="${'Job ID: ' + work.job.id}"></p>
-					<p th:text="${'Name: ' + work.job.name + ', Category: ' + work.job.category}"></p>
-					<p th:text="${'Description: ' + work.job.description}"></p>
-				</td>
-			</tr>
-			<tr>
-				<td> Work Salary: </td>
-				<td> <Input type="text" name="updateSalary" th:value="${work.salary}" size="10" /> </td>
-			</tr>
-			<tr>
-				<td> Work Start Date: </td>
-				<td> <Input type="text" name="updateStartDate" th:value="${work.startDate}" size="10" /> </td>
-			</tr>
-			<tr>
-				<td> Work End Date: </td>
-				<td> <Input type="text" name="updateEndDate" th:value="${work.endDate}" size="10" /> </td>
-			</tr>
+				<tr>
+					<td>
+						<p>Work Id:</p>
+					</td>
+					<td>
+						<p th:value="${work.id}" th:text="${work.id}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>User details:</p>
+					</td>
+					<td>
+						<p th:name="updateUserId" th:value="${work.user.id}"
+							th:text="${'User ID: ' + work.user.id}"></p>
+						<p
+							th:text="${'First name: ' + work.user.firstName + ', Last name: ' + work.user.lastName}"></p>
+						<p
+							th:text="${'Gender: ' + work.user.gender + ', Birth date: ' + work.user.birthDate}"></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Company details:</p>
+					</td>
+					<td>
+						<p th:name="updateCompanyId" th:value="${work.company.id}"
+							th:text="${'Company ID: ' + work.company.id}"></p>
+						<p
+							th:text="${'Name: ' + work.company.name + ', Ceo: ' + work.company.CEO}"></p>
+						<p
+							th:text="${'Number of employees: ' + work.company.numberEmployees}"></p>
+						<p th:text="${'Foundation year: ' + work.company.foundationYear}"></p>
+						<p th:text="${'Description: ' + work.company.description}"></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Job Type details:</p>
+					</td>
+					<td>
+						<p th:name="updateJobId" th:value="${work.job.id}"
+							th:text="${'Job ID: ' + work.job.id}"></p>
+						<p
+							th:text="${'Name: ' + work.job.name + ', Category: ' + work.job.category}"></p>
+						<p th:text="${'Description: ' + work.job.description}"></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Work Salary:</p>
+					</td>
+					<td><Input type="number" name="updateSalary"
+						th:value="${work.salary}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Work Start Date:</p>
+					</td>
+					<td><Input type="text" name="updateStartDate"
+						th:value="${work.startDate}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Work End Date:</p>
+					</td>
+					<td><Input type="text" name="updateEndDate"
+						th:value="${work.endDate}" /></td>
+				</tr>
 			</table>
-			<br>
-			<input type="submit" value="Update work">
-		</form>	
-					
-		<br>
-		<a href="http://localhost:8080/works">Return to works list</a>
+			<br> <input type="submit" value="Update work">
+		</form>
+		<br> <br> <a href="http://localhost:8080/works">Return
+			to works list</a>
 	</div>
 </body>
 </html>

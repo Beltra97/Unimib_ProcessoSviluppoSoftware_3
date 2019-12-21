@@ -5,50 +5,74 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
+	<div align="center">
 		<h2>FRIENDS HOME PAGE</h2>
-		-------- LIST OF ALL FRIENDS -------- 
-		<br><br>
+		-------------------- LIST OF ALL FRIENDS -------------------- <br>
+		<br>
 		<table border="1">
 			<tr>
-				<th> Friendship Id </th>
-				<th>  </th>
+				<th>Friendship Id</th>
+				<th></th>
 			</tr>
-			<tr th:each="friend : ${friends}"> 
-				<td width="100" align="center"> <a th:href="@{friends/{id}(id = ${friend.id})}" th:text="${friend.id}"></a> </td>
-				<td width="100" align="center"> <a th:href="@{deletefriend{id}(id=${friend.id})}">Delete</a> </td>
+			<tr th:each="friend : ${friends}">
+				<td width="100" align="center"><a
+					th:href="@{friends/{id}(id = ${friend.id})}" th:text="${friend.id}"></a>
+				</td>
+				<td width="100" align="center"><a
+					th:href="@{deletefriend{id}(id=${friend.id})}">Delete</a></td>
 			</tr>
 		</table>
-		<br>
-		Click a friend to view friend details
-		<br><br><br>
-		--------- ADD A NEW FRIENDSHIP ---------
-		<br>
-		<form action="#" th:action="@{addfriend}" th:object="${friend}" method="post">
-	    	<p>First User: 
-	    	<select th:name="addUser1">
-	        	<option> --- </option>
-	        	<option th:each="user : ${users}" th:text="${user.id + ' - ' + user.firstName + ' ' + user.lastName}" th:value="${user.id}"> </option>
-	        </select>
-	    	</p>
-	        <p>Second User: 
-	        <select th:name="addUser2">
-	        	<option> --- </option>
-	        	<option th:each="user : ${users}" th:text="${user.id + ' - ' + user.firstName + ' '+ user.lastName}" th:value="${user.id}"> </option>
-	        </select>
-	        </p>
-	        <p>Creation Date: <input type="text" name="addCreationDate" /></p>
-	        <p><input type="submit" value="Add a new friendship" /> <input type="reset" value="Clean values" /></p>
-	    </form>
-	    <br><br>
-	    --------- SEARCH A FRIENDSHIP BY DATE ---------
-		<br>
-		<form action="#" th:action="@{searchfriend}" th:object="${friend}" method="post">
-	    	<p>Creation Friendship Date: <input type="text" name="friendSearchDate"/></p>
-	        <p><input type="submit" value="Search friendship" /></p>
-	    </form>
-	    <br><br>
-	    <a href="http://localhost:8080">Return to entities list</a>
+		<br> Click a friend to view friend details <br> <br> <br>
+		--------------------- ADD A NEW FRIENDSHIP --------------------- <br>
+		<form action="#" th:action="@{addfriend}" th:object="${friend}"
+			method="post">
+			<table>
+				<tr>
+					<td>
+						<p>First User:</p>
+					</td>
+					<td><select th:name="addUser1">
+							<option>---</option>
+							<option th:each="user : ${users}"
+								th:text="${user.id + ' - ' + user.firstName + ' ' + user.lastName}"
+								th:value="${user.id}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Second User:</p>
+					</td>
+					<td><select th:name="addUser2">
+							<option>---</option>
+							<option th:each="user : ${users}"
+								th:text="${user.id + ' - ' + user.firstName + ' '+ user.lastName}"
+								th:value="${user.id}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Creation Date:</p>
+					</td>
+					<td><input type="text" name="addCreationDate" /></td>
+				</tr>
+			</table>
+			<br> <input type="submit" value="Add a new friendship" /> <input
+				type="reset" value="Clean values" />
+
+		</form>
+		<br> <br> ------------- SEARCH A FRIENDSHIP BY DATE
+		------------- <br>
+		<form action="#" th:action="@{searchfriend}" th:object="${friend}"
+			method="post">
+			<p>
+				Creation Friendship Date: <input type="text" name="friendSearchDate" />
+			</p>
+			<p>
+				<input type="submit" value="Search friendship" />
+			</p>
+		</form>
+		<br> <br> <a href="http://localhost:8080">Return to
+			entities list</a>
 	</div>
 </body>
 </html>

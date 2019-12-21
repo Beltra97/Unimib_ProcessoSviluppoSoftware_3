@@ -5,42 +5,76 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
+	<div align="center">
 		<h2>USER ADDRESSES HOME PAGE</h2>
-		-------- LIST OF ALL USER ADDRESSES -------- 
-		<br><br>
+		------------------ LIST OF ALL USER ADDRESSES ------------------ <br>
+		<br>
 		<table border="1">
 			<tr>
-				<th> User Address Street Name </th>
-				<th>  </th>
+				<th>User Address Street Name</th>
+				<th></th>
 			</tr>
-			<tr th:each="uaddress : ${uaddresses}"> 
-				<td width="100" align="center"> <a th:href="@{uaddresses/{id}(id = ${uaddress.id})}" th:text="${uaddress.street}"></a> </td>
-				<td width="100" align="center"> <a th:href="@{deleteuaddress{id}(id=${uaddress.id})}">Delete</a> </td>
+			<tr th:each="uaddress : ${uaddresses}">
+				<td width="100" align="center"><a
+					th:href="@{uaddresses/{id}(id = ${uaddress.id})}"
+					th:text="${uaddress.street}"></a></td>
+				<td width="100" align="center"><a
+					th:href="@{deleteuaddress{id}(id=${uaddress.id})}">Delete</a></td>
 			</tr>
 		</table>
-		<br>
-		Click a user address to view user address details
-		<br><br><br>
-		--------- ADD A NEW USER ADDRESS ---------
-		<br>
-		<form action="#" th:action="@{adduaddress}" th:object="${uaddress}" method="post">
-	    	<p>Street: <input type="text" name="addStreet"/></p>
-	        <p>Civic Number: <input type="text" name="addCivicNumber" /></p>
-	        <p>Postal Code: <input type="text" name="addPostalCode" /></p>
-	        <p>Municipality: <input type="text" name="addMunicipality" /></p>
-	        <p>Nation: <input type="text" name="addNation" /></p>
-	        <p><input type="submit" value="Add a new user address" /> <input type="reset" value="Clean values" /></p>
-	    </form>
-	    <br><br>
-	    --------- SEARCH A USER ADDRESS BY STREET ---------
-		<br>
-		<form action="#" th:action="@{searchuaddress}" th:object="${uaddress}" method="post">
-	    	<p>Street: <input type="text" name="jobSearchNameStreet"/></p>
-	        <p><input type="submit" value="Search user address" /></p>
-	    </form>
-	    <br><br>
-	    <a href="http://localhost:8080">Return to entities list</a>
+		<br> Click a user address to view user address details <br>
+		<br> <br> ------------------- ADD A NEW USER ADDRESS
+		------------------- <br>
+		<form action="#" th:action="@{adduaddress}" th:object="${uaddress}"
+			method="post">
+			<table>
+				<tr>
+					<td>
+						<p>Street:</p>
+					</td>
+					<td><input type="text" name="addStreet" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Civic Number:</p>
+					</td>
+					<td><input type="text" name="addCivicNumber" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Postal Code:</p>
+					</td>
+					<td><input type="text" name="addPostalCode" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Municipality:</p>
+					</td>
+					<td><input type="text" name="addMunicipality" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Nation:</p>
+					</td>
+					<td><input type="text" name="addNation" /></td>
+				</tr>
+			</table>
+			<br> <input type="submit" value="Add a new user address" /> <input
+				type="reset" value="Clean values" />
+		</form>
+		<br> <br> ------------- SEARCH A USER ADDRESS BY STREET
+		------------- <br>
+		<form action="#" th:action="@{searchuaddress}" th:object="${uaddress}"
+			method="post">
+			<p>
+				Street Name: <input type="text" name="jobSearchNameStreet" />
+			</p>
+			<p>
+				<input type="submit" value="Search user address" />
+			</p>
+		</form>
+		<br> <br> <a href="http://localhost:8080">Return to
+			entities list</a>
 	</div>
 </body>
 </html>

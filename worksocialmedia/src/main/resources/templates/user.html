@@ -1,56 +1,74 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title> USER DETAILS </title>
+<title>USER DETAILS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div align="center">
 		<h3>USER DETAILS:</h3>
-		
-		<form action="#" th:action="@{http://localhost:8080/users/updateuser{id}(id = ${user.id})}" th:object="${user}" method="post">
+		<form action="#"
+			th:action="@{http://localhost:8080/users/updateuser{id}(id = ${user.id})}"
+			th:object="${user}" method="post">
 			<table>
 				<tr>
-					<td> <p>User Id:</p> </td>
-					<td> <p th:value="${user.id}" th:text="${user.id}" /> </td>
-				</tr>
-				<tr>
-					<td> <p>User First Name:</p> </td>
-					<td> <Input type="text" name="updateFirstName" th:value="${user.firstName}" /> </td>
-				</tr>
-				<tr>
-					<td> <p>User Last Name:</p> </td>
-					<td> <Input type="text" name="updateLastName" th:value="${user.lastName}" /> </td>
-				</tr>
-				<tr>
-					<td> <p>User Gender:</p> </td>
-					<td> 
-						<select th:name="updateGender">
-				        	<option th:text="${user.gender}" th:value="${user.gender}"></option>
-				        	<option th:text="Male" th:value="Male"></option>
-				        	<option th:text="Female" th:value="Female"></option>
-			        	</select>
+					<td>
+						<p>User Id:</p>
+					</td>
+					<td>
+						<p th:value="${user.id}" th:text="${user.id}" />
 					</td>
 				</tr>
 				<tr>
-					<td> <p>User Birth Date:</p> </td>
-					<td> <Input type="text" name="updateBirthDate" th:value="${user.birthDate}" /> </td>
+					<td>
+						<p>User First Name:</p>
+					</td>
+					<td><Input type="text" name="updateFirstName"
+						th:value="${user.firstName}" /></td>
 				</tr>
 				<tr>
-					<td> <p>User Address details:</p> </td>
-					<td> 
-						<p th:name="updateAddressUserId" th:value="${user.residentialAddress.id}" th:text="${'User Address ID: ' + user.residentialAddress.id}"></p>
-						<p th:text="${user.residentialAddress.street + ', ' + user.residentialAddress.civicNumber}"></p>
-						<p th:text="${user.residentialAddress.postalCode + ', ' + user.residentialAddress.municipality + ', ' + user.residentialAddress.nation}"></p>
+					<td>
+						<p>User Last Name:</p>
+					</td>
+					<td><Input type="text" name="updateLastName"
+						th:value="${user.lastName}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>User Gender:</p>
+					</td>
+					<td><select th:name="updateGender">
+							<option th:text="${user.gender}" th:value="${user.gender}"></option>
+							<option th:text="Male" th:value="Male"></option>
+							<option th:text="Female" th:value="Female"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>
+						<p>User Birth Date:</p>
+					</td>
+					<td><Input type="text" name="updateBirthDate"
+						th:value="${user.birthDate}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>User Address details:</p>
+					</td>
+					<td>
+						<p th:name="updateAddressUserId"
+							th:value="${user.residentialAddress.id}"
+							th:text="${'User Address ID: ' + user.residentialAddress.id}"></p>
+						<p
+							th:text="${user.residentialAddress.street + ', ' + user.residentialAddress.civicNumber}"></p>
+						<p
+							th:text="${user.residentialAddress.postalCode + ', ' + user.residentialAddress.municipality + ', ' + user.residentialAddress.nation}"></p>
 					</td>
 				</tr>
 			</table>
-			<br>
-			<input type="submit" value="Update user">
-		</form>	
-					
-		<br>
-		<a href="http://localhost:8080/users">Return to users list</a>
+			<br> <input type="submit" value="Update user">
+		</form>
+		<br> <br> <a href="http://localhost:8080/users">Return
+			to users list</a>
 	</div>
 </body>
 </html>

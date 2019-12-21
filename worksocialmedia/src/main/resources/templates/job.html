@@ -1,38 +1,51 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title> JOB DETAILS </title>
+<title>JOB DETAILS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
+	<div align="center">
 		<h3>JOB DETAILS:</h3>
-		
-		<form action="#" th:action="@{http://localhost:8080/jobs/updatejob{id}(id = ${job.id})}" th:object="${job}" method="post">
+		<form action="#"
+			th:action="@{http://localhost:8080/jobs/updatejob{id}(id = ${job.id})}"
+			th:object="${job}" method="post">
 			<table>
-			<tr>
-				<td> Job Id: </td>
-				<td> <p th:value="${job.id}" th:text="${job.id}" /> </td>
-			</tr>
-			<tr>
-				<td> Job Name: </td>
-				<td> <Input type="text" name="updateName" th:value="${job.name}" size="10" /> </td>
-			</tr>
-			<tr>
-				<td> Job Category: </td>
-				<td> <Input type="text" name="updateCategory" th:value="${job.category}" size="10" /> </td>
-			</tr>
-			<tr>
-				<td> Job Description: </td>
-				<td> <Input type="text" name="updateDescription" th:value="${job.description}" size="10" /> </td>
-			</tr>
+				<tr>
+					<td>
+						<p>Job Id:</p>
+					</td>
+					<td>
+						<p th:value="${job.id}" th:text="${job.id}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Job Name:</p>
+					</td>
+					<td><Input type="text" name="updateName"
+						th:value="${job.name}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Job Category:</p>
+					</td>
+					<td><Input type="text" name="updateCategory"
+						th:value="${job.category}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Job Description:</p>
+					</td>
+					<td><textarea name="updateDescription"
+							th:text="${job.description}" th:value="${job.description}"
+							cols="30" rows="5"> </textarea></td>
+				</tr>
 			</table>
-			<br>
-			<input type="submit" value="Update job">
-		</form>	
-					
-		<br>
-		<a href="http://localhost:8080/jobs">Return to jobs list</a>
+			<br> <input type="submit" value="Update job">
+		</form>
+		<br> <br> <a href="http://localhost:8080/jobs">Return to
+			jobs list</a>
 	</div>
 </body>
 </html>

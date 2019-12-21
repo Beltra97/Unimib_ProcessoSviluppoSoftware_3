@@ -1,14 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title> COMPANY DETAILS </title>
+<title>COMPANY DETAILS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div align="center">
-		<h3>COMPANY DETAILS:</h3> 
-		
-		<form action="#" th:action="@{http://localhost:8080/companies/updatecompany{id}(id = ${company.id})}" th:object="${company}" method="post">
+		<h3>COMPANY DETAILS:</h3>
+		<form action="#"
+			th:action="@{http://localhost:8080/companies/updatecompany{id}(id = ${company.id})}"
+			th:object="${company}" method="post">
 			<table>
 				<tr>
 					<td><p>Company Id:</p></td>
@@ -16,39 +17,48 @@
 				</tr>
 				<tr>
 					<td><p>Company Name:</p></td>
-					<td><Input type="text" name="updateName" th:value="${company.name}" /></td>
+					<td><Input type="text" name="updateName"
+						th:value="${company.name}" /></td>
 				</tr>
 				<tr>
 					<td><p>Company CEO:</p></td>
-					<td><Input type="text" name="updateCEO" th:value="${company.CEO}" /></td>
+					<td><Input type="text" name="updateCEO"
+						th:value="${company.CEO}" /></td>
 				</tr>
 				<tr>
 					<td><p>Company Number of Employees:</p></td>
-					<td><Input type="number" name="updateNumberEmployees" th:value="${company.numberEmployees}" /></td>
+					<td><Input type="number" name="updateNumberEmployees"
+						th:value="${company.numberEmployees}" /></td>
 				</tr>
 				<tr>
 					<td><p>Company Year of Foundation:</p></td>
-					<td><Input type="text" name="updateFoundationYear" th:value="${company.foundationYear}" /></td>
+					<td><Input type="text" name="updateFoundationYear"
+						th:value="${company.foundationYear}" /></td>
 				</tr>
 				<tr>
 					<td><p>Company Description:</p></td>
-					<td> <textarea name="updateDescription" th:text="${company.description}" th:value="${company.description}" cols="30" rows="5"> </textarea></td>
+					<td><textarea name="updateDescription"
+							th:text="${company.description}"
+							th:value="${company.description}" cols="30" rows="5"> </textarea></td>
 				</tr>
 				<tr>
 					<td><p>Company Address details:</p></td>
-					<td> 
-						<p th:name="updateAddressCompanyId" th:value="${company.legalAddress.id}" th:text="${'Company Address ID: ' + company.legalAddress.id}"></p>
-						<p th:text="${company.legalAddress.street + ', ' + company.legalAddress.civicNumber}"></p>
-						<p th:text="${company.legalAddress.postalCode + ', ' + company.legalAddress.municipality + ', ' + company.legalAddress.nation}"></p>
+					<td>
+						<p th:name="updateAddressCompanyId"
+							th:value="${company.legalAddress.id}"
+							th:text="${'Company Address ID: ' + company.legalAddress.id}"></p>
+						<p
+							th:text="${company.legalAddress.street + ', ' + company.legalAddress.civicNumber}"></p>
+						<p
+							th:text="${company.legalAddress.postalCode + ', ' + company.legalAddress.municipality + ', ' + company.legalAddress.nation}"></p>
 					</td>
 				</tr>
 			</table>
-			<br>
-			<input type="submit" value="Update company">
-		</form>	
-					
-		<br>
-		<a href="http://localhost:8080/companies">Return to companies list</a>
+			<br> <input type="submit" value="Update company">
+		</form>
+
+		<br> <a href="http://localhost:8080/companies">Return to
+			companies list</a>
 	</div>
 </body>
 </html>

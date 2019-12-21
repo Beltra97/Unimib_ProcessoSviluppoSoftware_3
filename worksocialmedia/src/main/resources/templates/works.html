@@ -5,55 +5,95 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
+	<div align="center">
 		<h2>WORKS HOME PAGE</h2>
-		-------- LIST OF ALL WORKS -------- 
-		<br><br>
+		------------------ LIST OF ALL WORKS ------------------ <br> <br>
 		<table border="1">
 			<tr>
-				<th> Work Id </th>
-				<th>  </th>
+				<th>Work Id</th>
+				<th></th>
 			</tr>
-			<tr th:each="work : ${works}"> 
-				<td width="100" align="center"> <a th:href="@{works/{id}(id = ${work.id})}" th:text="${work.id}"></a> </td>
-				<td width="100" align="center"> <a th:href="@{deletework{id}(id=${work.id})}">Delete</a> </td>
+			<tr th:each="work : ${works}">
+				<td width="100" align="center"><a
+					th:href="@{works/{id}(id = ${work.id})}" th:text="${work.id}"></a>
+				</td>
+				<td width="100" align="center"><a
+					th:href="@{deletework{id}(id=${work.id})}">Delete</a></td>
 			</tr>
 		</table>
-		<br>
-		Click a work to view work details
-		<br><br><br>
-		--------- ADD A NEW WORK ---------
-		<br>
-		<form action="#" th:action="@{addwork}" th:object="${work}" method="post">
-	    	<p>User:</p>
-	    	<select th:name="addUser">
-	        				<option> --- </option>
-	        				<option th:each="user : ${users}" th:text="${user.id + ' - ' + user.firstName + ' ' + user.lastName}" th:value="${user.id}"> </option>
-	        </select>
-	        <p>Company:</p> 
-	        <select th:name="addCompany">
-	        				<option> --- </option>
-	        				<option th:each="company : ${companies}" th:text="${company.id + ' - ' + company.name}" th:value="${company.id}"> </option>
-	        </select>
-	        <p>Job Type:</p> 
-	        <select th:name="addJobType">
-	        				<option> --- </option>
-	        				<option th:each="job : ${jobs}" th:text="${job.id + ' - ' + job.name}" th:value="${job.id}"> </option>
-	        </select>
-	        <p>Salary: <input type="text" name="addSalary" /></p>
-	        <p>Start Date: <input type="text" name="addStartDate" /></p>
-	        <p>End Date: <input type="text" name="addEndDate" /></p>
-	        <p><input type="submit" value="Add a new work" /> <input type="reset" value="Clean values" /></p>
-	    </form>
-	    <br><br>
-	    --------- SEARCH A WORK BY SALARY ---------
-		<br>
-		<form action="#" th:action="@{searchwork}" th:object="${work}" method="post">
-	    	<p>Salary: <input type="text" name="workSearchSalary"/></p>
-	        <p><input type="submit" value="Search work" /></p>
-	    </form>
-	    <br><br>
-	    <a href="http://localhost:8080">Return to entities list</a>
+		<br> Click a work to view work details <br> <br> <br>
+		------------------- ADD A NEW WORK ------------------- <br>
+		<form action="#" th:action="@{addwork}" th:object="${work}"
+			method="post">
+			<table>
+				<tr>
+					<td>
+						<p>User:</p>
+					</td>
+					<td><select th:name="addUser">
+							<option>---</option>
+							<option th:each="user : ${users}"
+								th:text="${user.id + ' - ' + user.firstName + ' ' + user.lastName}"
+								th:value="${user.id}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Company:</p>
+					</td>
+					<td><select th:name="addCompany">
+							<option>---</option>
+							<option th:each="company : ${companies}"
+								th:text="${company.id + ' - ' + company.name}"
+								th:value="${company.id}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Job Type:</p>
+					</td>
+					<td><select th:name="addJobType">
+							<option>---</option>
+							<option th:each="job : ${jobs}"
+								th:text="${job.id + ' - ' + job.name}" th:value="${job.id}">
+							</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Salary:</p>
+					</td>
+					<td><input type="number" name="addSalary" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Start Date:</p>
+					</td>
+					<td><input type="text" name="addStartDate" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>End Date:</p>
+					</td>
+					<td><input type="text" name="addEndDate" /></td>
+				</tr>
+			</table>
+			<br> <input type="submit" value="Add a new work" /> <input
+				type="reset" value="Clean values" />
+		</form>
+		<br> <br> ------------- SEARCH A WORK BY SALARY
+		------------- <br>
+		<form action="#" th:action="@{searchwork}" th:object="${work}"
+			method="post">
+			<p>
+				Salary: <input type="text" name="workSearchSalary" />
+			</p>
+			<p>
+				<input type="submit" value="Search work" />
+			</p>
+		</form>
+		<br> <br> <a href="http://localhost:8080">Return to
+			entities list</a>
 	</div>
 </body>
 </html>

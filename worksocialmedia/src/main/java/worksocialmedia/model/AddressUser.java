@@ -5,10 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "address_user")
 public class AddressUser extends Address {
 
   private static final long serialVersionUID = -5124436115031696628L;

@@ -1,75 +1,88 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>USERS HOME PAGE</title>
+<title>JOBS HOME PAGE</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div align="center">
-		<h2>USERS HOME PAGE</h2>
-		---------------- LIST OF ALL USERS ---------------- 
-		<br><br>
+		<h2>JOBS HOME PAGE</h2>
+		-------------------------- LIST OF ALL JOBS --------------------------
+		<br> <br>
 		<table border="1">
 			<tr>
-				<th> User Last Name </th>
-				<th>  </th>
+				<th>User Last Name</th>
+				<th></th>
 			</tr>
-			<tr th:each="user : ${users}"> 
-				<td width="100" align="center"> <a th:href="@{users/{id}(id = ${user.id})}" th:text="${user.lastName}"></a> </td>
-				<td width="100" align="center"> <a th:href="@{deleteuser/{id}(id=${user.id})}">Delete</a> </td>
+			<tr th:each="user : ${users}">
+				<td width="100" align="center"><a
+					th:href="@{users/{id}(id = ${user.id})}" th:text="${user.lastName}"></a>
+				</td>
+				<td width="100" align="center"><a
+					th:href="@{deleteuser/{id}(id=${user.id})}">Delete</a></td>
 			</tr>
 		</table>
-		<br>
-		Click a user to view user details
-		<br><br><br>
-		---------------- ADD A NEW USER ----------------
-		<br>
-		<form action="#" th:action="@{adduser}" th:object="${user}" method="post">
+		<br> Click a user to view user details <br> <br> <br>
+		-------------------------- ADD A NEW JOB -------------------------- <br>
+		<form action="#" th:action="@{adduser}" th:object="${user}"
+			method="post">
 			<table>
 				<tr>
-					<td><p>First Name:</p></td>
-					<td><input type="text" name="addFirstName"/></td>
+					<td>
+						<p>First Name:</p>
+					</td>
+					<td><input type="text" name="addFirstName" /></td>
 				</tr>
 				<tr>
-					<td><p>Last Name:</p></td>
-					<td><input type="text" name="addLastName"/></td>
+					<td>
+						<p>Last Name:</p>
+					</td>
+					<td><input type="text" name="addLastName" /></td>
 				</tr>
 				<tr>
-					<td><p>Gender:</p></td>
+					<td>
+						<p>Gender:</p>
+					</td>
 					<td><select th:name="addGender">
-	        				<option> --- </option>
-	        				<option th:text="Male" th:value="Male"></option>
-	        				<option th:text="Female" th:value="Female"></option>
-	        			</select>
-	        		</td>
+							<option>---</option>
+							<option th:text="Male" th:value="Male"></option>
+							<option th:text="Female" th:value="Female"></option>
+					</select></td>
 				</tr>
 				<tr>
-					<td><p>Birth Date:</p></td>
-					<td><input type="text" name="addBirthDate"/></td>
+					<td>
+						<p>Birth Date:</p>
+					</td>
+					<td><input type="text" name="addBirthDate" /></td>
 				</tr>
 				<tr>
-					<td><p>User Address:</p></td>
-					<td> 
-						<select th:name="addResidentialAddressId">
-	        				<option> --- </option>
-	        				<option th:each="uaddress : ${uaddresses}" th:text="${uaddress.id + ' - ' + uaddress.street + ', ' + uaddress.municipality}" th:value="${uaddress.id}"> </option>
-	        			</select>
-	        		</td>
+					<td>
+						<p>User Address:</p>
+					</td>
+					<td><select th:name="addResidentialAddressId">
+							<option>---</option>
+							<option th:each="uaddress : ${uaddresses}"
+								th:text="${uaddress.id + ' - ' + uaddress.street + ', ' + uaddress.municipality}"
+								th:value="${uaddress.id}"></option>
+					</select></td>
 				</tr>
-	        </table>
-	        <br>
-	        <input type="submit" value="Add a new user" /> <input type="reset" value="Clean values" />
-	    </form>
-	    <br><br>
-	    ---------------- SEARCH A JOB BY LAST NAME ----------------
-		<br>
-		<form action="#" th:action="@{searchuser}" th:object="${user}" method="post">
-	    	<p>Last Name: <input type="text" name="userSearchLastName"/></p>
-	        <p><input type="submit" value="Search job" /></p>
-	    </form>
-	    <br><br>
-	    <a href="http://localhost:8080">Return to entities list</a>
-	    
+			</table>
+			<br> <input type="submit" value="Add a new user" /> <input
+				type="reset" value="Clean values" />
+		</form>
+		<br> <br> ---------------- SEARCH A JOB BY LAST NAME
+		---------------- <br>
+		<form action="#" th:action="@{searchuser}" th:object="${user}"
+			method="post">
+			<p>
+				Last Name: <input type="text" name="userSearchLastName" />
+			</p>
+			<p>
+				<input type="submit" value="Search job" />
+			</p>
+		</form>
+		<br> <br> <a href="http://localhost:8080">Return to
+			entities list</a>
 	</div>
 </body>
 </html>

@@ -1,46 +1,62 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title> FRIENDSHIP DETAILS </title>
+<title>FRIENDSHIP DETAILS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
-		 <h3>FRIENDSHIP DETAILS:</h3>
-		
-		<form action="#" th:action="@{http://localhost:8080/friends/updatefriend{id}(id = ${friend.id})}" th:object="${friend}" method="post">
+	<div align="center">
+		<h3>FRIENDSHIP DETAILS:</h3>
+		<form action="#"
+			th:action="@{http://localhost:8080/friends/updatefriend{id}(id = ${friend.id})}"
+			th:object="${friend}" method="post">
 			<table>
-			<tr>
-				<td> Friend Id: </td>
-				<td> <p th:value="${friend.id}" th:text="${friend.id}" /> </td>
-			</tr>
-			<tr>
-				<td> First User details: </td>
-				<td> 
-					<p th:name="updateUser1Id" th:value="${friend.user1.id}" th:text="${'User ID: ' + friend.user1.id}"></p>
-					<p th:text="${'First name: ' + friend.user1.firstName + ', Last name: ' + friend.user1.lastName}"></p>
-					<p th:text="${'Gender: ' + friend.user1.gender + ', Birth date: ' + friend.user1.birthDate}"></p>
-				</td>
-			</tr>
-			<tr>
-				<td> Second User details: </td>
-				<td> 
-					<p th:name="updateUser2Id" th:value="${friend.user2.id}" th:text="${'User ID: ' + friend.user2.id}"></p>
-					<p th:text="${'First name: ' + friend.user2.firstName + ', Last name: ' + friend.user2.lastName}"></p>
-					<p th:text="${'Gender: ' + friend.user2.gender + ', Birth date: ' + friend.user2.birthDate}"></p>
-				</td>
-			</tr>
-			<tr>
-				<td> Friendship Creation Date: </td>
-				<td> <Input type="text" name="updateCreationDate" th:value="${friend.creationDate}" size="10" /> </td>
-			</tr>
+				<tr>
+					<td>
+						<p>Friend Id:</p>
+					</td>
+					<td>
+						<p th:value="${friend.id}" th:text="${friend.id}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>First User details:</p>
+					</td>
+					<td>
+						<p th:name="updateUser1Id" th:value="${friend.user1.id}"
+							th:text="${'User ID: ' + friend.user1.id}"></p>
+						<p
+							th:text="${'First name: ' + friend.user1.firstName + ', Last name: ' + friend.user1.lastName}"></p>
+						<p
+							th:text="${'Gender: ' + friend.user1.gender + ', Birth date: ' + friend.user1.birthDate}"></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Second User details:</p>
+					</td>
+					<td>
+						<p th:name="updateUser2Id" th:value="${friend.user2.id}"
+							th:text="${'User ID: ' + friend.user2.id}"></p>
+						<p
+							th:text="${'First name: ' + friend.user2.firstName + ', Last name: ' + friend.user2.lastName}"></p>
+						<p
+							th:text="${'Gender: ' + friend.user2.gender + ', Birth date: ' + friend.user2.birthDate}"></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Friendship Creation Date:</p>
+					</td>
+					<td><Input type="text" name="updateCreationDate"
+						th:value="${friend.creationDate}" /></td>
+				</tr>
 			</table>
-			<br>
-			<input type="submit" value="Update friendship">
-		</form>	
-					
-		<br>
-		<a href="http://localhost:8080/friends">Return to friendships list</a>
+			<br> <input type="submit" value="Update friendship">
+		</form>
+		<br> <br> <a href="http://localhost:8080/friends">Return
+			to friendships list</a>
 	</div>
 </body>
 </html>
