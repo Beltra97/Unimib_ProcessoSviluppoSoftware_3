@@ -50,29 +50,37 @@ public class JobRepositoryImpl implements JobRepository {
 
 	public void addJob(Job job) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		if (!entityManager.getTransaction().isActive()) {
-			entityManager.getTransaction().begin();
+		try {
+			if (!entityManager.getTransaction().isActive()) {
+				entityManager.getTransaction().begin();
+			}
+			entityManager.persist(job);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+		} catch (Exception ex) {
+			entityManager.getTransaction().rollback();
 		}
-		entityManager.persist(job);
-		entityManager.getTransaction().commit();
-		entityManager.close();
 	}
 
 	public void updateJob(Long id, String name, String category, String description) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		if (!entityManager.getTransaction().isActive()) {
-			entityManager.getTransaction().begin();
+		try {
+			if (!entityManager.getTransaction().isActive()) {
+				entityManager.getTransaction().begin();
+			}
+			Job job = entityManager.find(Job.class, id);
+			job.setName(name);
+			job.setCategory(category);
+			job.setDescription(description);
+			entityManager.persist(job);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+		} catch (Exception ex) {
+			entityManager.getTransaction().rollback();
 		}
-		Job job = entityManager.find(Job.class, id);
-		job.setName(name);
-		job.setCategory(category);
-		job.setDescription(description);
-		entityManager.persist(job);
-		entityManager.getTransaction().commit();
-		entityManager.close();
 	}
 
-	public Job searchJob(String jobSearchName) {
+	public Job searchJobName(String jobSearchName) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
 		Job job = (Job) entityManager.createQuery("FROM Job j WHERE j.name = '" + jobSearchName + "'")
@@ -81,6 +89,30 @@ public class JobRepositoryImpl implements JobRepository {
 		entityManager.close();
 
 		return job;
+	}
+	
+	public Job searchJobDescription(String jobSearchDescription) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+
+		Job job = (Job) entityManager.createQuery("FROM Job j WHERE j.description = '" + jobSearchDescription + "'")
+				.getSingleResult();
+
+		entityManager.close();
+
+		return job;
+	}
+	
+	public int getSize() {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		int size = 0;
+		try {
+			size = entityManager.createQuery("FROM Job").getResultList().size();
+
+			entityManager.close();
+		} catch (Exception ex) {
+			size = 0;
+		}
+		return size;
 	}
 
 }

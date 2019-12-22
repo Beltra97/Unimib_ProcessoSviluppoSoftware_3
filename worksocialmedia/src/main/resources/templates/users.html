@@ -70,12 +70,21 @@
 			<br> <input type="submit" value="Add a new user" /> <input
 				type="reset" value="Clean values" />
 		</form>
-		<br> <br> ---------------- SEARCH A JOB BY LAST NAME
-		---------------- <br>
+		<br> <br> ---------------- SEARCH A JOB BY LAST NAME ---------------- <br>
 		<form action="#" th:action="@{searchuser}" th:object="${user}"
 			method="post">
 			<p>
 				Last Name: <input type="text" name="userSearchLastName" />
+			</p>
+			<p>
+				<input type="submit" value="Search job" />
+			</p>
+		</form>
+		<br> <br> ---------------- SEARCH A JOB BY BIRTH DATE ---------------- <br>
+		<form action="#" th:action="@{searchUserBirthDate}" th:object="${user}"
+			method="post">
+			<p>
+				Birth Date: <input type="text" name="searchBirthDate" />
 			</p>
 			<p>
 				<input type="submit" value="Search job" />

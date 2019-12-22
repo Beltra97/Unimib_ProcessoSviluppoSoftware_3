@@ -98,4 +98,21 @@ public class CompanyController {
 	return modelAndView; 
   }
   
+  @PostMapping("searchcompanyCEO")
+  public ModelAndView companySearchCEO(@RequestParam("companySearchCEO") String companySearchCEO) {
+	
+	ModelAndView modelAndView = new ModelAndView();
+	  
+	Company company = companyRepository.searchCompanyCEO(companySearchCEO);
+	if(company != null) {
+		modelAndView.addObject("company", company); 
+		modelAndView.setViewName("company");
+	}
+	else {
+		System.out.print("A");
+	}
+	  
+	return modelAndView; 
+  }
+  
 }

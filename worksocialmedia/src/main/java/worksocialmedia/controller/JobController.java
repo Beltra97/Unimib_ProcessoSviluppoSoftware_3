@@ -77,12 +77,25 @@ public class JobController {
 	return "redirect:http://localhost:8080/jobs";
   }
   
-  @PostMapping("searchjob")
-  public ModelAndView jobSearch(@RequestParam("jobSearchName") String jobSearchName) {
+  @PostMapping("searchJobName")
+  public ModelAndView jobSearch(@RequestParam("searchName") String jobSearchName) {
 	
 	ModelAndView modelAndView = new ModelAndView();
 	  
-	Job job = jobRepository.searchJob(jobSearchName);
+	Job job = jobRepository.searchJobName(jobSearchName);
+	  
+	modelAndView.addObject("job", job); 
+	modelAndView.setViewName("job");
+	  
+	return modelAndView; 
+  }
+  
+  @PostMapping("searchJobDescription")
+  public ModelAndView searchjobDescription(@RequestParam("searchDescription") String jobSearchDescription) {
+	
+	ModelAndView modelAndView = new ModelAndView();
+	  
+	Job job = jobRepository.searchJobDescription(jobSearchDescription);
 	  
 	modelAndView.addObject("job", job); 
 	modelAndView.setViewName("job");

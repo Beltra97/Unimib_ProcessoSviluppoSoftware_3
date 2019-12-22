@@ -12,4 +12,6 @@ public interface AddressCompanyRepository extends Repository<AddressCompany, Lon
 	
 	public AddressCompany searchCompanyAddress(String jobSearchNameStreet);
 	
+	public int getSize();
+	
 }

@@ -107,12 +107,25 @@ public class WorkController {
 	return "redirect:http://localhost:8080/works";
   }
   
-  @PostMapping("searchwork")
+  @PostMapping("searchworkSalary")
   public ModelAndView companySearch(@RequestParam("workSearchSalary") Integer workSearchSalary) {
 	
 	ModelAndView modelAndView = new ModelAndView();
 	  
-	Work work = workRepository.searchWork(workSearchSalary);
+	Work work = workRepository.searchWorkSalary(workSearchSalary);
+	  
+	modelAndView.addObject("work", work); 
+	modelAndView.setViewName("work");
+	  
+	return modelAndView; 
+  }
+  
+  @PostMapping("searchworkStartDate")
+  public ModelAndView companySearchStartDate(@RequestParam("workSearchStartDate") String workSearchStartDate) {
+	
+	ModelAndView modelAndView = new ModelAndView();
+	  
+	Work work = workRepository.searchWorkStartDate(workSearchStartDate);
 	  
 	modelAndView.addObject("work", work); 
 	modelAndView.setViewName("work");

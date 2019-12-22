@@ -62,12 +62,21 @@
 			<br> <input type="submit" value="Add a new company" /> <input
 				type="reset" value="Clean values" />
 		</form>
-		<br> <br> ------------------ SEARCH A COMPANY BY NAME
-		------------------ <br>
+		<br> <br> ------------------ SEARCH A COMPANY BY NAME ------------------ <br>
 		<form action="#" th:action="@{searchcompany}" th:object="${company}"
 			method="post">
 			<p>
 				Name: <input type="text" name="companySearchName" />
+			</p>
+			<p>
+				<input type="submit" value="Search company" />
+			</p>
+		</form>
+		<br> <br> ------------------ SEARCH A COMPANY BY CEO ------------------ <br>
+		<form action="#" th:action="@{searchcompanyCEO}" th:object="${company}"
+			method="post">
+			<p>
+				Name: <input type="text" name="companySearchCEO" />
 			</p>
 			<p>
 				<input type="submit" value="Search company" />

@@ -17,4 +17,7 @@ public interface UserRepository extends Repository<User, Long>{
 	
 	public User searchUser(String userSearchLastName);
 	
+	public User searchUserBirthDate(String userSearchBirthDate);
+	
+	public int getSize();
 }

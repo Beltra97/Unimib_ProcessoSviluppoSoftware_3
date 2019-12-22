@@ -17,4 +17,7 @@ public interface CompanyRepository extends Repository<Company, Long>{
 	
 	public Company searchCompany(String jobSearchName);
 	
+	public Company searchCompanyCEO(String jobSearchCEO);
+	
+	public int getSize();
 }

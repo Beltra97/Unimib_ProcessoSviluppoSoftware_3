@@ -80,7 +80,9 @@ public class AddressCompanyController {
 	ModelAndView modelAndView = new ModelAndView();
 	  
 	AddressCompany addressCompany = addressCompanyRepository.searchCompanyAddress(jobSearchNameStreet);
-	  
+	if(addressCompany == null)
+		new AddressCompanyNotFoundException();
+	
 	modelAndView.addObject("caddress", addressCompany); 
 	modelAndView.setViewName("caddress");
 	  

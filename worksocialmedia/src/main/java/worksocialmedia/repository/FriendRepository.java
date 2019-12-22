@@ -17,4 +17,5 @@ public interface FriendRepository extends Repository<Friend, Long>{
 	
 	public Friend searchFriend(String friendSearchDate);
 	
+	public int getSize();
 }

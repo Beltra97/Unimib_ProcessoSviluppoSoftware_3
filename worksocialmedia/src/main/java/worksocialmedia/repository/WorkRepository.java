@@ -21,6 +21,10 @@ public interface WorkRepository extends Repository<Work, Long>{
 	
 	public void updateWork(Long id, Integer salary, String startDate, String endDate);
 	
-	public Work searchWork(Integer workSearchSalary);
+	public Work searchWorkSalary(Integer workSearchSalary);
+	
+	public Work searchWorkStartDate(String workSearchStartDate);
+	
+	public int getSize();
 	
 }

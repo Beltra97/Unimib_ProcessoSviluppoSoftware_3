@@ -10,6 +10,9 @@ public interface JobRepository extends Repository<Job, Long>{
 	
 	public void updateJob(Long id, String name, String category, String description);
 	
-	public Job searchJob(String jobSearchName);
+	public Job searchJobName(String jobSearchName);
 	
+	public Job searchJobDescription(String jobSearchDescription);
+	
+	public int getSize();
 }

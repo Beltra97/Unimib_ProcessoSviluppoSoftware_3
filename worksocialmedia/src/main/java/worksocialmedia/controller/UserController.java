@@ -93,10 +93,29 @@ public class UserController {
 	ModelAndView modelAndView = new ModelAndView();
 	  
 	User user = userRepository.searchUser(userSearchLastName);
+	if(user != null) {
+		modelAndView.addObject("user", user); 
+		modelAndView.setViewName("user");
+	}
+	else {
+		new UserNotFoundException();
+	}
+	return modelAndView; 
+  }
+  
+  @PostMapping("searchUserBirthDate")
+  public ModelAndView searchUserBirthDate(@RequestParam("searchBirthDate") String searchBirthDate) {
+	
+	ModelAndView modelAndView = new ModelAndView();
 	  
-	modelAndView.addObject("user", user); 
-	modelAndView.setViewName("user");
-	  
+	User user = userRepository.searchUserBirthDate(searchBirthDate);
+	if(user != null) {
+		modelAndView.addObject("user", user); 
+		modelAndView.setViewName("user");
+	}
+	else {
+		new UserNotFoundException();
+	}
 	return modelAndView; 
   }
   

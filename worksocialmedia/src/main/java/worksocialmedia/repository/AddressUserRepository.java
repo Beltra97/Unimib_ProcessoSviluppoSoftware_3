@@ -12,4 +12,5 @@ public interface AddressUserRepository extends Repository<AddressUser, Long>{
 	
 	public AddressUser searchUserAddress(String jobSearchNameStreet);
 	
+	public int getSize();
 }

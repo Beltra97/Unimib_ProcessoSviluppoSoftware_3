@@ -49,12 +49,19 @@
 			<br> <input type="submit" value="Add a new job" /> <input
 				type="reset" value="Clean values" />
 		</form>
-		<br> <br> -------------------- SEARCH A JOB BY NAME
-		-------------------- <br>
-		<form action="#" th:action="@{searchjob}" th:object="${job}"
-			method="post">
+		<br> <br> -------------------- SEARCH A JOB BY NAME -------------------- <br>
+		<form action="#" th:action="@{searchJobName}" th:object="${job}" method="post">
 			<p>
-				Name: <input type="text" name="jobSearchName" />
+				Name: <input type="text" name="searchName" />
+			</p>
+			<p>
+				<input type="submit" value="Search job" />
+			</p>
+		</form>
+		<br> <br> -------------------- SEARCH A JOB BY DESCRIPTION -------------------- <br>
+		<form action="#" th:action="@{searchJobDescription}" th:object="${job}" method="post">
+			<p>
+				Description: <input type="text" name="searchDescription" />
 			</p>
 			<p>
 				<input type="submit" value="Search job" />
