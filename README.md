@@ -68,7 +68,7 @@ di generalizzazione is-a.
 ## Modello logico
 
 - User(Id, FirstName, LastName, Gender, BirthDate, ResidentialAddress)  
-- FriendsOf(User1, User2, CreationDate)  
+- FriendsOf(<u>User1</u>, User2, CreationDate)  
 - Company(Id, Name, CEO, Description, NumEmployees, FoundationYear, LegalAddress)  
 - JobType(Id, Name, Description, Category)  
 - Works(User, Company, JobType, Salary, StartDate, EndDate)  
