@@ -97,7 +97,7 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 
 		Company company = null;
 		try {
-			company = (Company) entityManager.createQuery("FROM Company c WHERE c.name = '" + CompanySearchName + "'")
+			company = (Company) entityManager.createQuery("FROM Company c WHERE lower(c.name) = '" + CompanySearchName.toLowerCase() + "'")
 					.getSingleResult();
 
 			entityManager.close();
@@ -113,11 +113,11 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 
 		Company company = null;
 		try {
-			company = (Company) entityManager.createQuery("FROM Company c WHERE c.CEO = '" + CompanySearchCEO + "'")
+			company = (Company) entityManager.createQuery("FROM Company c WHERE lower(c.CEO) = '" + CompanySearchCEO.toLowerCase() + "'")
 					.getResultList();
 
 			entityManager.close();
-		} catch (NoResultException ex) {
+		} catch (Exception ex) {
 			company = null;
 		}
 		return company;

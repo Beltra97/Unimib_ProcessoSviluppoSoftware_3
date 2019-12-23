@@ -94,7 +94,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 		User user = null;
 		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE u.lastName = '" + userSearchLastName + "'")
+			user = (User) entityManager.createQuery("FROM User u WHERE lower(u.lastName) = '" + userSearchLastName.toLowerCase() + "'")
 					.getSingleResult();
 
 			entityManager.close();

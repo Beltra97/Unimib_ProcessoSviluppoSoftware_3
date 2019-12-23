@@ -85,7 +85,7 @@ public class JobRepositoryImpl implements JobRepository {
 
 		Job job = null;
 		try {
-			job = (Job) entityManager.createQuery("FROM Job j WHERE j.name = '" + jobSearchName + "'")
+			job = (Job) entityManager.createQuery("FROM Job j WHERE lower(j.name) = '" + jobSearchName.toLowerCase() + "'")
 					.getSingleResult();
 			
 			entityManager.close();
@@ -101,7 +101,7 @@ public class JobRepositoryImpl implements JobRepository {
 
 		Job job = null;
 		try {
-			job = (Job) entityManager.createQuery("FROM Job j WHERE j.description = '" + jobSearchDescription + "'")
+			job = (Job) entityManager.createQuery("FROM Job j WHERE lower(j.description) = '" + jobSearchDescription.toLowerCase() + "'")
 					.getSingleResult();
 
 			entityManager.close();

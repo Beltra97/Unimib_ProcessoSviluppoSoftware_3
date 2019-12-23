@@ -92,7 +92,7 @@ public class AddressCompanyRepositoryImpl implements AddressCompanyRepository {
 		AddressCompany addressCompany = null;
 		try {
 			addressCompany = (AddressCompany) entityManager
-					.createQuery("FROM AddressCompany au WHERE au.street = '" + jobSearchNameStreet + "'")
+					.createQuery("FROM AddressCompany au WHERE lower(au.street) = '" + jobSearchNameStreet.toLowerCase() + "'")
 					.getSingleResult();
 
 			entityManager.close();

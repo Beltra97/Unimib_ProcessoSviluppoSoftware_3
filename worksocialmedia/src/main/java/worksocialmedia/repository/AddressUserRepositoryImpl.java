@@ -90,7 +90,7 @@ public class AddressUserRepositoryImpl implements AddressUserRepository {
 		AddressUser addressUser = null;
 		try {
 			addressUser = (AddressUser) entityManager
-					.createQuery("FROM AddressUser au WHERE au.street = '" + jobSearchNameStreet + "'")
+					.createQuery("FROM AddressUser au WHERE lower(au.street) = '" + jobSearchNameStreet.toLowerCase() + "'")
 					.getSingleResult();
 
 			entityManager.close();
