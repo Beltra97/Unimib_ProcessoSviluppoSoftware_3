@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>JOBS HOME PAGE</title>
+<title>USERS HOME PAGE</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div align="center">
-		<h2>JOBS HOME PAGE</h2>
-		-------------------------- LIST OF ALL JOBS --------------------------
+		<h2>USERS HOME PAGE</h2>
+		-------------------------- LIST OF ALL USERS --------------------------
 		<br> <br>
 		<table border="1">
 			<tr>
@@ -23,7 +23,7 @@
 			</tr>
 		</table>
 		<br> Click a user to view user details <br> <br> <br>
-		-------------------------- ADD A NEW JOB -------------------------- <br>
+		-------------------------- ADD A NEW USER -------------------------- <br>
 		<form action="#" th:action="@{adduser}" th:object="${user}"
 			method="post">
 			<table>
@@ -70,24 +70,24 @@
 			<br> <input type="submit" value="Add a new user" /> <input
 				type="reset" value="Clean values" />
 		</form>
-		<br> <br> ---------------- SEARCH A JOB BY LAST NAME ---------------- <br>
+		<br> <br> ---------------- SEARCH A USER BY LAST NAME ---------------- <br>
 		<form action="#" th:action="@{searchuser}" th:object="${user}"
 			method="post">
 			<p>
 				Last Name: <input type="text" name="userSearchLastName" />
 			</p>
 			<p>
-				<input type="submit" value="Search job" />
+				<input type="submit" value="Search user" />
 			</p>
 		</form>
-		<br> <br> ---------------- SEARCH A JOB BY BIRTH DATE ---------------- <br>
+		<br> <br> ---------------- SEARCH A USER BY BIRTH DATE ---------------- <br>
 		<form action="#" th:action="@{searchUserBirthDate}" th:object="${user}"
 			method="post">
 			<p>
 				Birth Date: <input type="text" name="searchBirthDate" />
 			</p>
 			<p>
-				<input type="submit" value="Search job" />
+				<input type="submit" value="Search user" />
 			</p>
 		</form>
 		<br> <br> <a href="http://localhost:8080">Return to

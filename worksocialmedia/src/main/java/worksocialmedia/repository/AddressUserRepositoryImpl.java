@@ -87,14 +87,20 @@ public class AddressUserRepositoryImpl implements AddressUserRepository {
 	public AddressUser searchUserAddress(String jobSearchNameStreet) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		AddressUser addressUser = (AddressUser) entityManager
-				.createQuery("FROM AddressUser au WHERE au.street = '" + jobSearchNameStreet + "'").getSingleResult();
+		AddressUser addressUser = null;
+		try {
+			addressUser = (AddressUser) entityManager
+					.createQuery("FROM AddressUser au WHERE au.street = '" + jobSearchNameStreet + "'")
+					.getSingleResult();
 
-		entityManager.close();
+			entityManager.close();
+		} catch (Exception ex) {
+			addressUser = null;
+		}
 
 		return addressUser;
 	}
-	
+
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;

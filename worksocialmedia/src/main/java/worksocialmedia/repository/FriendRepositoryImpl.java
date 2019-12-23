@@ -90,10 +90,15 @@ public class FriendRepositoryImpl implements FriendRepository {
 	public Friend searchFriend(String friendSearchDate) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		Friend friend = (Friend) entityManager
-				.createQuery("FROM Friend f WHERE f.creationDate = '" + friendSearchDate + "'").getSingleResult();
+		Friend friend = null;
+		try {
+			friend = (Friend) entityManager
+					.createQuery("FROM Friend f WHERE f.creationDate = '" + friendSearchDate + "'").getSingleResult();
 
-		entityManager.close();
+			entityManager.close();
+		} catch (Exception ex) {
+			friend = null;
+		}
 
 		return friend;
 	}

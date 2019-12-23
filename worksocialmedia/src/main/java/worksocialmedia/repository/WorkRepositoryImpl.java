@@ -107,10 +107,15 @@ public class WorkRepositoryImpl implements WorkRepository {
 	public Work searchWorkSalary(Integer workSearchSalary) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		Work work = (Work) entityManager.createQuery("FROM Work w WHERE w.salary = '" + workSearchSalary + "'")
-				.getSingleResult();
-
-		entityManager.close();
+		Work work = null;
+		try {
+			work = (Work) entityManager.createQuery("FROM Work w WHERE w.salary = '" + workSearchSalary + "'")
+					.getSingleResult();
+	
+			entityManager.close();
+		} catch (Exception ex) {
+			work = null;
+		}	
 
 		return work;
 	}
@@ -118,11 +123,16 @@ public class WorkRepositoryImpl implements WorkRepository {
 	public Work searchWorkStartDate(String workSearchStartDate) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		Work work = (Work) entityManager.createQuery("FROM Work w WHERE w.start_date = '" + workSearchStartDate + "'")
-				.getSingleResult();
+		Work work = null;
+		try {
+			work = (Work) entityManager.createQuery("FROM Work w WHERE w.startDate = '" + workSearchStartDate + "'")
+					.getSingleResult();
 
-		entityManager.close();
-
+			entityManager.close();
+		} catch (Exception ex) {
+			work = null;
+		}
+		
 		return work;
 	}
 	

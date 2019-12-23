@@ -1,6 +1,5 @@
 package worksocialmedia.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,32 +95,34 @@ public class CompanyRepositoryImpl implements CompanyRepository {
 	public Company searchCompany(String CompanySearchName) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		Company company = (Company) entityManager
-				.createQuery("FROM Company c WHERE c.name = '" + CompanySearchName + "'").getSingleResult();
+		Company company = null;
+		try {
+			company = (Company) entityManager.createQuery("FROM Company c WHERE c.name = '" + CompanySearchName + "'")
+					.getSingleResult();
 
-		entityManager.close();
+			entityManager.close();
+		} catch (Exception ex) {
+			company = null;
+		}
 
 		return company;
 	}
-	
+
 	public Company searchCompanyCEO(String CompanySearchCEO) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
 		Company company = null;
-		List<Company> companies = new ArrayList<Company>();
 		try {
-			companies = entityManager.createQuery("FROM Company c WHERE c.CEO = '" + CompanySearchCEO + "'").getResultList();
-			if(companies.size() == 1) 
-				company = companies.get(0);
-			
+			company = (Company) entityManager.createQuery("FROM Company c WHERE c.CEO = '" + CompanySearchCEO + "'")
+					.getResultList();
+
 			entityManager.close();
-		}
-		catch(NoResultException ex) {
+		} catch (NoResultException ex) {
 			company = null;
 		}
 		return company;
 	}
-	
+
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;

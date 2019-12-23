@@ -16,75 +16,87 @@ import worksocialmedia.repository.AddressUserRepositoryImpl;
 
 @Controller
 public class AddressUserController {
-  private AddressUserRepository addressUserRepository;
+	private AddressUserRepository addressUserRepository;
 
-  public AddressUserController() {
-    this.addressUserRepository = new AddressUserRepositoryImpl();
-  }
+	public AddressUserController() {
+		this.addressUserRepository = new AddressUserRepositoryImpl();
+	}
 
-  @GetMapping("/uaddresses")
-  public ModelAndView companies() {
-    ModelAndView modelAndView = new ModelAndView();
+	@GetMapping("/uaddresses")
+	public ModelAndView companies() {
+		ModelAndView modelAndView = new ModelAndView();
 
-    Iterable<AddressUser> addressesUser = addressUserRepository.findAll();
+		Iterable<AddressUser> addressesUser = addressUserRepository.findAll();
 
-    modelAndView.addObject("uaddresses", addressesUser);
-    modelAndView.setViewName("uaddresses");
+		modelAndView.addObject("uaddresses", addressesUser);
+		modelAndView.setViewName("uaddresses");
 
-    return modelAndView;
-  }
+		return modelAndView;
+	}
 
-  @GetMapping("/uaddresses/{id}")
-  public ModelAndView user(@PathVariable("id") Long id) {
-    ModelAndView modelAndView = new ModelAndView();
+	@GetMapping("/uaddresses/{id}")
+	public ModelAndView user(@PathVariable("id") Long id) {
+		ModelAndView modelAndView = new ModelAndView();
 
-    Optional<AddressUser> addressUser = addressUserRepository.findById(id);
-    addressUser.orElseThrow(AddressUserNotFoundException::new);
+		Optional<AddressUser> addressUser = addressUserRepository.findById(id);
+		addressUser.orElseThrow(AddressUserNotFoundException::new);
 
-    modelAndView.addObject("uaddress", addressUser.get());
-    modelAndView.setViewName("uaddress");
+		modelAndView.addObject("uaddress", addressUser.get());
+		modelAndView.setViewName("uaddress");
 
-    return modelAndView;
-  }
-  
-  @GetMapping("deleteuaddress{id}")
-  public String userAddressDelete(@PathVariable("id") Long id) {
-	  
-    addressUserRepository.deleteUserAddressById(id);
-    
-    return "redirect:http://localhost:8080/uaddresses";
-    
-  }
-  
-  @PostMapping("adduaddress")
-  public String userAddressAdd(@RequestParam(value="addStreet") String street, @RequestParam(value="addMunicipality") String municipality, @RequestParam(value="addCivicNumber") String civicNumber, @RequestParam(value="addPostalCode") String postalCode, @RequestParam(value="addNation") String nation) {
+		return modelAndView;
+	}
 
-	AddressUser addressUser = new AddressUser(street, municipality, civicNumber, postalCode, nation);
-	  
-	addressUserRepository.addUserAddress(addressUser);
-	
-	return "redirect:uaddresses";
-  }
-  
-  @PostMapping("uaddresses/updateuaddress{id}")
-  public String userUpdate(@PathVariable("id") Long id, @RequestParam(value="updateStreet") String street, @RequestParam(value="updateMunicipality") String municipality, @RequestParam(value="updateCivicNumber") String civicNumber, @RequestParam(value="updatePostalCode") String postalCode, @RequestParam(value="updateNation") String nation) {
+	@GetMapping("deleteuaddress{id}")
+	public String userAddressDelete(@PathVariable("id") Long id) {
 
-	addressUserRepository.updateUserAddress(id, street, municipality, civicNumber, postalCode, nation);
-	
-	return "redirect:http://localhost:8080/uaddresses";
-  }
-  
-  @PostMapping("searchuaddress")
-  public ModelAndView userAddressSearch(@RequestParam("jobSearchNameStreet") String jobSearchNameStreet) {
-	
-	ModelAndView modelAndView = new ModelAndView();
-	  
-	AddressUser addressUser = addressUserRepository.searchUserAddress(jobSearchNameStreet);
-	  
-	modelAndView.addObject("uaddress", addressUser); 
-	modelAndView.setViewName("uaddress");
-	  
-	return modelAndView; 
-  }
-  
+		addressUserRepository.deleteUserAddressById(id);
+
+		return "redirect:http://localhost:8080/uaddresses";
+
+	}
+
+	@PostMapping("adduaddress")
+	public String userAddressAdd(@RequestParam(value = "addStreet") String street,
+			@RequestParam(value = "addMunicipality") String municipality,
+			@RequestParam(value = "addCivicNumber") String civicNumber,
+			@RequestParam(value = "addPostalCode") String postalCode,
+			@RequestParam(value = "addNation") String nation) {
+
+		AddressUser addressUser = new AddressUser(street, municipality, civicNumber, postalCode, nation);
+
+		addressUserRepository.addUserAddress(addressUser);
+
+		return "redirect:uaddresses";
+	}
+
+	@PostMapping("uaddresses/updateuaddress{id}")
+	public String userUpdate(@PathVariable("id") Long id, @RequestParam(value = "updateStreet") String street,
+			@RequestParam(value = "updateMunicipality") String municipality,
+			@RequestParam(value = "updateCivicNumber") String civicNumber,
+			@RequestParam(value = "updatePostalCode") String postalCode,
+			@RequestParam(value = "updateNation") String nation) {
+
+		addressUserRepository.updateUserAddress(id, street, municipality, civicNumber, postalCode, nation);
+
+		return "redirect:http://localhost:8080/uaddresses";
+	}
+
+	@PostMapping("searchuaddress")
+	public ModelAndView userAddressSearch(@RequestParam("jobSearchNameStreet") String jobSearchNameStreet) {
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		AddressUser addressUser = addressUserRepository.searchUserAddress(jobSearchNameStreet);
+
+		if (addressUser == null) {
+			throw new AddressUserNotFoundException();
+		}
+
+		modelAndView.addObject("uaddress", addressUser);
+		modelAndView.setViewName("uaddress");
+
+		return modelAndView;
+	}
+
 }

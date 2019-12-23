@@ -7,9 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import worksocialmedia.exception.UserNotFoundException;
 import worksocialmedia.model.AddressUser;
 import worksocialmedia.model.User;
 
@@ -17,7 +14,6 @@ public class UserRepositoryImpl implements UserRepository {
 
 	private EntityManagerFactory entityManagerFactory;
 
-	@Autowired
 	public UserRepositoryImpl() {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("worksocialmedia");
 	}
@@ -108,13 +104,13 @@ public class UserRepositoryImpl implements UserRepository {
 
 		return user;
 	}
-	
+
 	public User searchUserBirthDate(String userSearchBirthDate) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
 		User user = null;
 		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE u.birth_date = '" + userSearchBirthDate + "'")
+			user = (User) entityManager.createQuery("FROM User u WHERE u.birthDate = '" + userSearchBirthDate + "'")
 					.getSingleResult();
 
 			entityManager.close();
@@ -124,7 +120,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 		return user;
 	}
-	
+
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;

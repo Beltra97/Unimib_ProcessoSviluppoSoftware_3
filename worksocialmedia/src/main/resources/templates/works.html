@@ -86,7 +86,7 @@
 		<form action="#" th:action="@{searchworkSalary}" th:object="${work}"
 			method="post">
 			<p>
-				Salary: <input type="text" name="workSearchSalary" />
+				Salary: <input type="number" name="workSearchSalary" />
 			</p>
 			<p>
 				<input type="submit" value="Search work" />
@@ -97,7 +97,7 @@
 		<form action="#" th:action="@{searchworkStartDate}" th:object="${work}"
 			method="post">
 			<p>
-				Salary: <input type="text" name="workSearchStartDate" />
+				Start Date: <input type="text" name="workSearchStartDate" />
 			</p>
 			<p>
 				<input type="submit" value="Search work" />

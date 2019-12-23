@@ -84,6 +84,10 @@ public class JobController {
 	  
 	Job job = jobRepository.searchJobName(jobSearchName);
 	  
+	if (job == null) {
+		throw new JobNotFoundException();
+	}
+	
 	modelAndView.addObject("job", job); 
 	modelAndView.setViewName("job");
 	  
@@ -96,6 +100,10 @@ public class JobController {
 	ModelAndView modelAndView = new ModelAndView();
 	  
 	Job job = jobRepository.searchJobDescription(jobSearchDescription);
+	
+	if (job == null) {
+		throw new JobNotFoundException();
+	}
 	  
 	modelAndView.addObject("job", job); 
 	modelAndView.setViewName("job");

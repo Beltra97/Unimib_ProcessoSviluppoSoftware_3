@@ -88,6 +88,7 @@ public class AddressCompanyRepositoryImpl implements AddressCompanyRepository {
 
 	public AddressCompany searchCompanyAddress(String jobSearchNameStreet) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+
 		AddressCompany addressCompany = null;
 		try {
 			addressCompany = (AddressCompany) entityManager
@@ -98,9 +99,10 @@ public class AddressCompanyRepositoryImpl implements AddressCompanyRepository {
 		} catch (Exception ex) {
 			addressCompany = null;
 		}
+
 		return addressCompany;
 	}
-	
+
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;

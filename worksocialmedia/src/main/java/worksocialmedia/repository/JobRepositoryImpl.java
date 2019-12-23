@@ -83,25 +83,35 @@ public class JobRepositoryImpl implements JobRepository {
 	public Job searchJobName(String jobSearchName) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		Job job = (Job) entityManager.createQuery("FROM Job j WHERE j.name = '" + jobSearchName + "'")
-				.getSingleResult();
-
-		entityManager.close();
+		Job job = null;
+		try {
+			job = (Job) entityManager.createQuery("FROM Job j WHERE j.name = '" + jobSearchName + "'")
+					.getSingleResult();
+			
+			entityManager.close();
+		} catch (Exception ex) {
+			job = null;
+		}
 
 		return job;
 	}
-	
+
 	public Job searchJobDescription(String jobSearchDescription) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		Job job = (Job) entityManager.createQuery("FROM Job j WHERE j.description = '" + jobSearchDescription + "'")
-				.getSingleResult();
+		Job job = null;
+		try {
+			job = (Job) entityManager.createQuery("FROM Job j WHERE j.description = '" + jobSearchDescription + "'")
+					.getSingleResult();
 
-		entityManager.close();
-
+			entityManager.close();
+		} catch (Exception ex) {
+			job = null;
+		}
+		
 		return job;
 	}
-	
+
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;

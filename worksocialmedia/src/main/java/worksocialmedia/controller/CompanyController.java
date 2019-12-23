@@ -19,100 +19,112 @@ import worksocialmedia.repository.CompanyRepositoryImpl;
 
 @Controller
 public class CompanyController {
-  private CompanyRepository companyRepository;
-  private AddressCompanyRepository addressCompanyRepository;
+	private CompanyRepository companyRepository;
+	private AddressCompanyRepository addressCompanyRepository;
 
-  public CompanyController() {
-    this.companyRepository = new CompanyRepositoryImpl();
-    this.addressCompanyRepository = new AddressCompanyRepositoryImpl();
-  }
+	public CompanyController() {
+		this.companyRepository = new CompanyRepositoryImpl();
+		this.addressCompanyRepository = new AddressCompanyRepositoryImpl();
+	}
 
-  @GetMapping("/companies")
-  public ModelAndView companies() {
-    ModelAndView modelAndView = new ModelAndView();
+	@GetMapping("/companies")
+	public ModelAndView companies() {
+		ModelAndView modelAndView = new ModelAndView();
 
-    Iterable<AddressCompany> addressesCompany = addressCompanyRepository.findAll();
+		Iterable<AddressCompany> addressesCompany = addressCompanyRepository.findAll();
 
-    modelAndView.addObject("caddresses", addressesCompany);
-    modelAndView.setViewName("caddresses");
-    
-    Iterable<Company> company = companyRepository.findAll();
+		modelAndView.addObject("caddresses", addressesCompany);
+		modelAndView.setViewName("caddresses");
 
-    modelAndView.addObject("companies", company);
-    modelAndView.setViewName("companies");
+		Iterable<Company> company = companyRepository.findAll();
 
-    return modelAndView;
-  }
+		modelAndView.addObject("companies", company);
+		modelAndView.setViewName("companies");
 
-  @GetMapping("/companies/{id}")
-  public ModelAndView user(@PathVariable("id") Long id) {
-    ModelAndView modelAndView = new ModelAndView();
+		return modelAndView;
+	}
 
-    Optional<Company> company = companyRepository.findById(id);
-    company.orElseThrow(CompanyNotFoundException::new);
+	@GetMapping("/companies/{id}")
+	public ModelAndView user(@PathVariable("id") Long id) {
+		ModelAndView modelAndView = new ModelAndView();
 
-    modelAndView.addObject("company", company.get());
-    modelAndView.setViewName("company");
+		Optional<Company> company = companyRepository.findById(id);
+		company.orElseThrow(CompanyNotFoundException::new);
 
-    return modelAndView;
-  }
-  
-  @GetMapping("deletecompany{id}")
-  public String companyDelete(@PathVariable("id") Long id) {
-	  
-    companyRepository.deleteCompanyById(id);
-    
-    return "redirect:http://localhost:8080/companies";
-    
-  }
-  
-  @PostMapping("addcompany")
-  public String companyAdd(@RequestParam(value="addName") String name, @RequestParam(value="addCEO") String CEO, @RequestParam(value="addNumberEmployees") Integer numberEmployees, @RequestParam(value="addFoundationYear") String foundationYear, @RequestParam(value="addDescription") String description, @RequestParam(value="addLegalAddressId") Long companyAddressId) {
-
-	Optional<AddressCompany> addressCompany = companyRepository.findCompanyAddressById(companyAddressId);
-	Company company = new Company(name, CEO, numberEmployees, foundationYear, description, addressCompany.get());
-	  
-	companyRepository.addCompany(company);
-	
-	return "redirect:companies";
-  }
-  
-  @PostMapping("companies/updatecompany{id}")
-  public String userUpdate(@PathVariable("id") Long id, @RequestParam(value="updateName") String name, @RequestParam(value="updateCEO") String CEO, @RequestParam(value="updateNumberEmployees") Integer numberEmployees, @RequestParam(value="updateFoundationYear") String foundationYear, @RequestParam(value="updateDescription") String description) {
-
-	companyRepository.updateCompany(id, name, CEO, numberEmployees, foundationYear, description);
-	
-	return "redirect:http://localhost:8080/companies";
-  }
-  
-  @PostMapping("searchcompany")
-  public ModelAndView companySearch(@RequestParam("companySearchName") String companySearchName) {
-	
-	ModelAndView modelAndView = new ModelAndView();
-	  
-	Company company = companyRepository.searchCompany(companySearchName);
-	  
-	modelAndView.addObject("company", company); 
-	modelAndView.setViewName("company");
-	  
-	return modelAndView; 
-  }
-  
-  @PostMapping("searchcompanyCEO")
-  public ModelAndView companySearchCEO(@RequestParam("companySearchCEO") String companySearchCEO) {
-	
-	ModelAndView modelAndView = new ModelAndView();
-	  
-	Company company = companyRepository.searchCompanyCEO(companySearchCEO);
-	if(company != null) {
-		modelAndView.addObject("company", company); 
+		modelAndView.addObject("company", company.get());
 		modelAndView.setViewName("company");
+
+		return modelAndView;
 	}
-	else {
-		System.out.print("A");
+
+	@GetMapping("deletecompany{id}")
+	public String companyDelete(@PathVariable("id") Long id) {
+
+		companyRepository.deleteCompanyById(id);
+
+		return "redirect:http://localhost:8080/companies";
+
 	}
-	  
-	return modelAndView; 
-  }
-  
+
+	@PostMapping("addcompany")
+	public String companyAdd(@RequestParam(value = "addName") String name, @RequestParam(value = "addCEO") String CEO,
+			@RequestParam(value = "addNumberEmployees") Integer numberEmployees,
+			@RequestParam(value = "addFoundationYear") String foundationYear,
+			@RequestParam(value = "addDescription") String description,
+			@RequestParam(value = "addLegalAddressId") Long companyAddressId) {
+
+		Optional<AddressCompany> addressCompany = companyRepository.findCompanyAddressById(companyAddressId);
+		Company company = new Company(name, CEO, numberEmployees, foundationYear, description, addressCompany.get());
+
+		companyRepository.addCompany(company);
+
+		return "redirect:companies";
+	}
+
+	@PostMapping("companies/updatecompany{id}")
+	public String userUpdate(@PathVariable("id") Long id, @RequestParam(value = "updateName") String name,
+			@RequestParam(value = "updateCEO") String CEO,
+			@RequestParam(value = "updateNumberEmployees") Integer numberEmployees,
+			@RequestParam(value = "updateFoundationYear") String foundationYear,
+			@RequestParam(value = "updateDescription") String description) {
+
+		companyRepository.updateCompany(id, name, CEO, numberEmployees, foundationYear, description);
+
+		return "redirect:http://localhost:8080/companies";
+	}
+
+	@PostMapping("searchcompany")
+	public ModelAndView companySearch(@RequestParam("companySearchName") String companySearchName) {
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		Company company = companyRepository.searchCompany(companySearchName);
+
+		if (company == null) {
+			throw new CompanyNotFoundException();
+		}
+
+		modelAndView.addObject("company", company);
+		modelAndView.setViewName("company");
+
+		return modelAndView;
+	}
+
+	@PostMapping("searchcompanyCEO")
+	public ModelAndView companySearchCEO(@RequestParam("companySearchCEO") String companySearchCEO) {
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		Company company = companyRepository.searchCompanyCEO(companySearchCEO);
+
+		if (company == null) {
+			throw new CompanyNotFoundException();
+		}
+
+		modelAndView.addObject("company", company);
+		modelAndView.setViewName("company");
+
+		return modelAndView;
+	}
+
 }

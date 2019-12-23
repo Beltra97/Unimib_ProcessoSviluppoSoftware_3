@@ -29,8 +29,8 @@ INSERT INTO company (name, CEO, number_employees,  foundation_year, description,
 INSERT INTO company (name, CEO, number_employees,  foundation_year, description, legal_address) VALUES('Brembo', 'Daniele Schillaci', 1000, '16/03/1973', 'Brakes company', 4);
 
 INSERT INTO work (user, company, job, salary, start_date, end_date) VALUES(1, 1, 1, 20000, '12/01/2016', '12/01/2017');
-INSERT INTO work (user, company, job, salary, start_date, end_date) VALUES(2, 2, 4, 20000, '13/05/2012', '18/06/2018');
-INSERT INTO work (user, company, job, salary, start_date, end_date) VALUES(3, 1, 5, 20000, '23/10/2013', '1/1/2014');
+INSERT INTO work (user, company, job, salary, start_date, end_date) VALUES(2, 2, 4, 50000, '13/05/2012', '18/06/2018');
+INSERT INTO work (user, company, job, salary, start_date, end_date) VALUES(3, 1, 5, 35000, '23/10/2013', '1/1/2014');
 
 INSERT INTO friend (user1, user2, creation_date) VALUES(1, 2, '28/10/2013');
 INSERT INTO friend (user1, user2, creation_date) VALUES(1, 3, '23/08/2015');

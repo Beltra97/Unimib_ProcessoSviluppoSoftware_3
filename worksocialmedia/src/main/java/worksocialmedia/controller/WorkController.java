@@ -113,10 +113,12 @@ public class WorkController {
 	ModelAndView modelAndView = new ModelAndView();
 	  
 	Work work = workRepository.searchWorkSalary(workSearchSalary);
-	  
-	modelAndView.addObject("work", work); 
-	modelAndView.setViewName("work");
-	  
+	if(work != null) {
+		modelAndView.addObject("work", work); 
+		modelAndView.setViewName("work");
+	}else {
+		throw new WorkNotFoundException();
+	}
 	return modelAndView; 
   }
   
@@ -126,10 +128,12 @@ public class WorkController {
 	ModelAndView modelAndView = new ModelAndView();
 	  
 	Work work = workRepository.searchWorkStartDate(workSearchStartDate);
-	  
-	modelAndView.addObject("work", work); 
-	modelAndView.setViewName("work");
-	  
+	if(work != null) {
+		modelAndView.addObject("work", work); 
+		modelAndView.setViewName("work");
+	}else {
+		throw new WorkNotFoundException();
+	}
 	return modelAndView; 
   }
   
