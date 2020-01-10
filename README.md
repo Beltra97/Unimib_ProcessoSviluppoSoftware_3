@@ -73,3 +73,28 @@ di generalizzazione is-a.
 - Company(***Id***, Name, CEO, Description, NumEmployees, FoundationYear, LegalAddress)  
 - JobType(***Id***, Name, Description, Category)  
 - Works(***User***, ***Company***, ***JobType***, Salary, StartDate, EndDate)  
+
+
+## Come eseguire applicazione
+
+Comando per creazione package evitando la compilazione dei test.
+```bash
+mvnw -Dmaven.test.skip=true clean package spring-boot:repackage
+```
+
+Comando per runnare l'applicazione che sarà accessibile all'indirizzo 
+[http://localhost:8080](http://localhost:8080)
+```bash
+java -Djava.security.egd=file:/dev/./urandom -jar target/worksocialmedia.jar
+```
+
+Comando per creare un container per l'applicazione
+```bash
+docker build -t worksocialmedia:0.1.0-SNAPSHOT .
+```
+
+Comando per eseguire il container appena creato, anche in questo caso l'applicazione è
+accessibile all'indirizzo [http://localhost:8080](http://localhost:8080)
+```bash
+docker run --rm -p 8080:8080 worksocialmedia:0.1.0-SNAPSHOT
+```
