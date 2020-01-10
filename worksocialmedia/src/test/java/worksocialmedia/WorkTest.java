@@ -1,4 +1,4 @@
-package worksocialmedia.test;
+package worksocialmedia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
