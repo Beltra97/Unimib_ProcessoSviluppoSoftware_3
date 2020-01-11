@@ -2,7 +2,6 @@ package worksocialmedia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -11,10 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import worksocialmedia.model.AddressUser;
-import worksocialmedia.model.Company;
 import worksocialmedia.model.User;
-import worksocialmedia.repository.AddressCompanyRepository;
-import worksocialmedia.repository.AddressCompanyRepositoryImpl;
 import worksocialmedia.repository.AddressUserRepository;
 import worksocialmedia.repository.AddressUserRepositoryImpl;
 import worksocialmedia.repository.UserRepository;

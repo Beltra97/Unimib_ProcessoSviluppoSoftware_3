@@ -11,19 +11,10 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import worksocialmedia.model.AddressCompany;
 import worksocialmedia.model.Company;
-import worksocialmedia.model.Job;
-import worksocialmedia.model.User;
-import worksocialmedia.model.Work;
 import worksocialmedia.repository.AddressCompanyRepository;
 import worksocialmedia.repository.AddressCompanyRepositoryImpl;
 import worksocialmedia.repository.CompanyRepository;
 import worksocialmedia.repository.CompanyRepositoryImpl;
-import worksocialmedia.repository.JobRepository;
-import worksocialmedia.repository.JobRepositoryImpl;
-import worksocialmedia.repository.UserRepository;
-import worksocialmedia.repository.UserRepositoryImpl;
-import worksocialmedia.repository.WorkRepository;
-import worksocialmedia.repository.WorkRepositoryImpl;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CompanyTest {
