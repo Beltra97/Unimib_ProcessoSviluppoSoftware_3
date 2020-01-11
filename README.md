@@ -82,7 +82,7 @@ Comando per creazione package evitando la compilazione dei test.
 mvnw -Dmaven.test.skip=true clean package spring-boot:repackage
 ```
 
-Comando per runnare l'applicazione che sarà accessibile all'indirizzo 
+Comando per avviare l'applicazione che sarà accessibile all'indirizzo 
 [http://localhost:8080](http://localhost:8080)
 ```bash
 java -Djava.security.egd=file:/dev/./urandom -jar target/worksocialmedia.jar
