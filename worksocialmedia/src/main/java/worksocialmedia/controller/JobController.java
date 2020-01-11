@@ -3,7 +3,7 @@ package worksocialmedia.controller;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
+//import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +36,6 @@ public class JobController {
 
     return modelAndView;
   }
-
 	
   @GetMapping("jobs/{id}") 
   public ModelAndView job(@PathVariable("id") Long id) { 
@@ -51,20 +50,18 @@ public class JobController {
 	  return modelAndView; 
   }
 	  
-  
   @GetMapping("deletejob{id}")
   public String jobDelete(@PathVariable("id") Long id) {
 	  
-    jobRepository.deleteById(id);
+    jobRepository.deleteJobById(id);
     
-    return "redirect:jobs";
+    return "redirect:http://localhost:8080/jobs";
   }
   
-  
   @PostMapping("addjob")
-  public String jobAdd(@RequestParam(value="addName") String name, @RequestParam(value="addSalary") Integer salary) {
+  public String jobAdd(@RequestParam(value="addName") String name, @RequestParam(value="addCategory") String category, @RequestParam(value="addDescription") String description) {
 
-	Job job = new Job(name, salary);
+	Job job = new Job(name, category, description);
 	  
 	jobRepository.addJob(job);
 	
@@ -73,25 +70,45 @@ public class JobController {
   
   
   @PostMapping("jobs/updatejob{id}")
-  public String jobUpdate(@PathVariable("id") Long id, @RequestParam(value="updateName") String name, @RequestParam(value="updateSalary") Integer salary) {
+  public String jobUpdate(@PathVariable("id") Long id, @RequestParam(value="updateName") String name, @RequestParam(value="updateCategory") String category, @RequestParam(value="updateDescription") String description) {
 
-	jobRepository.updateJob(id, name, salary);
+	jobRepository.updateJob(id, name, category, description);
 	
 	return "redirect:http://localhost:8080/jobs";
   }
   
-  @PostMapping("searchJob")
-  public ModelAndView jobSearch(@RequestParam("jobSearchName") String jobSearchName) {
+  @PostMapping("searchJobName")
+  public ModelAndView jobSearch(@RequestParam("searchName") String jobSearchName) {
 	
 	ModelAndView modelAndView = new ModelAndView();
 	  
-	Job job = jobRepository.searchJob(jobSearchName);
+	Job job = jobRepository.searchJobName(jobSearchName);
+	  
+	if (job == null) {
+		throw new JobNotFoundException();
+	}
+	
+	modelAndView.addObject("job", job); 
+	modelAndView.setViewName("job");
+	  
+	return modelAndView; 
+  }
+  
+  @PostMapping("searchJobDescription")
+  public ModelAndView searchjobDescription(@RequestParam("searchDescription") String jobSearchDescription) {
+	
+	ModelAndView modelAndView = new ModelAndView();
+	  
+	Job job = jobRepository.searchJobDescription(jobSearchDescription);
+	
+	if (job == null) {
+		throw new JobNotFoundException();
+	}
 	  
 	modelAndView.addObject("job", job); 
 	modelAndView.setViewName("job");
 	  
 	return modelAndView; 
   }
-
   
 }

@@ -7,48 +7,63 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import worksocialmedia.model.AddressUser;
+import worksocialmedia.model.Friend;
 import worksocialmedia.model.User;
 
-public class UserRepositoryImpl implements UserRepository {
+public class FriendRepositoryImpl implements FriendRepository {
 
 	private EntityManagerFactory entityManagerFactory;
 
-	public UserRepositoryImpl() {
+	public FriendRepositoryImpl() {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("worksocialmedia");
 	}
 
 	@Override
-	public Optional<User> findById(Long id) {
+	public Optional<Friend> findById(Long id) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		Friend friend = entityManager.find(Friend.class, id);
+		entityManager.close();
+		return Optional.ofNullable(friend);
+	}
+
+	public Optional<User> findUserById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		User user = entityManager.find(User.class, id);
 		entityManager.close();
 		return Optional.ofNullable(user);
 	}
 
-	public Optional<AddressUser> findUserAddressById(Long id) {
-		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		AddressUser addressUser = entityManager.find(AddressUser.class, id);
-		entityManager.close();
-		return Optional.ofNullable(addressUser);
-	}
-
 	@Override
-	public Iterable<User> findAll() {
+	public Iterable<Friend> findAll() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		List<User> users = entityManager.createQuery("FROM User", User.class).getResultList();
+		List<Friend> friends = entityManager.createQuery("FROM Friend", Friend.class).getResultList();
 		entityManager.close();
-		return users;
+		return friends;
 	}
 
-	public void deleteUserById(Long id) {
+	public void deleteFriendById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			User user = entityManager.find(User.class, id);
-			entityManager.remove(user);
+			Friend friend = entityManager.find(Friend.class, id);
+			entityManager.remove(friend);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+		} catch (Exception ex) {
+			entityManager.getTransaction().rollback();
+		}
+
+	}
+
+	public void addFriend(Friend friend) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		try {
+			if (!entityManager.getTransaction().isActive()) {
+				entityManager.getTransaction().begin();
+			}
+			entityManager.persist(friend);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -56,13 +71,15 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public void addUser(User user) {
+	public void updateFriend(Long id, String creationDate) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			entityManager.persist(user);
+			Friend friend = entityManager.find(Friend.class, id);
+			friend.setCreationDate(creationDate);
+			entityManager.persist(friend);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -70,62 +87,27 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public void updateUser(Long id, String firstname, String lastname, String gender, String birthdate) {
-		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		try {
-			if (!entityManager.getTransaction().isActive()) {
-				entityManager.getTransaction().begin();
-			}
-			User user = entityManager.find(User.class, id);
-			user.setFirstName(firstname);
-			user.setLastName(lastname);
-			user.setGender(gender);
-			user.setBirthDate(birthdate);
-			entityManager.persist(user);
-			entityManager.getTransaction().commit();
-			entityManager.close();
-		} catch (Exception ex) {
-			entityManager.getTransaction().rollback();
-		}
-	}
-
-	public User searchUser(String userSearchLastName) {
+	public Friend searchFriend(String friendSearchDate) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		User user = null;
+		Friend friend = null;
 		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE lower(u.lastName) = '" + userSearchLastName.toLowerCase() + "'")
-					.getSingleResult();
+			friend = (Friend) entityManager
+					.createQuery("FROM Friend f WHERE f.creationDate = '" + friendSearchDate + "'").getSingleResult();
 
 			entityManager.close();
 		} catch (Exception ex) {
-			user = null;
+			friend = null;
 		}
 
-		return user;
-	}
-
-	public User searchUserBirthDate(String userSearchBirthDate) {
-		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-
-		User user = null;
-		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE u.birthDate = '" + userSearchBirthDate + "'")
-					.getSingleResult();
-
-			entityManager.close();
-		} catch (Exception ex) {
-			user = null;
-		}
-
-		return user;
+		return friend;
 	}
 
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;
 		try {
-			size = entityManager.createQuery("FROM User").getResultList().size();
+			size = entityManager.createQuery("FROM Friend").getResultList().size();
 
 			entityManager.close();
 		} catch (Exception ex) {

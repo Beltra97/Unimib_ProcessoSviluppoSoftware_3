@@ -1,40 +1,74 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>JOBS</title>
+<title>JOBS HOME PAGE</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
-		-------- LIST OF ALL JOB -------- 
+	<div align="center">
+		<h2>JOBS HOME PAGE</h2>
+		------------------------ LIST OF ALL JOBS ------------------------ <br>
 		<br>
 		<table border="1">
 			<tr>
-				<th> Job Name </th>
-				<th>  </th>
+				<th>Job Name</th>
+				<th></th>
 			</tr>
-			<tr th:each="job : ${jobs}"> 
-				<td width="100" align="center"> <a th:href="@{jobs/{id}(id = ${job.id})}" th:text="${job.jobName}"></a> </td>
-				<td width="100" align="center"> <a th:href="@{deletejob{id}(id=${job.id})}">Delete</a> </td>
+			<tr th:each="job : ${jobs}">
+				<td width="100" align="center"><a
+					th:href="@{jobs/{id}(id = ${job.id})}" th:text="${job.name}"></a></td>
+				<td width="100" align="center"><a
+					th:href="@{deletejob{id}(id=${job.id})}">Delete</a></td>
 			</tr>
 		</table>
-		<br>
-		Click a job to view job details
-		<br><br>
-		--------- ADD A NEW JOB ---------
-		<br>
-		<form action="#" th:action="@{addjob}" th:object="${job}" method="post">
-	    	<p>Name: <input type="text" name="addName"/></p>
-	        <p>Salary: <input type="text" name="addSalary" /></p>
-	        <p><input type="submit" value="Add a new job" /> <input type="reset" value="Clean values" /></p>
-	    </form>
-	    <br><br>
-	    --------- SEARCH A JOB BY NAME ---------
-		<br>
-		<form action="#" th:action="@{searchJob}" th:object="${job}" method="post">
-	    	<p>Name: <input type="text" name="jobSearchName"/></p>
-	        <p><input type="submit" value="Search job" /></p>
-	    </form>
+		<br> Click a job to view job details <br> <br> <br>
+		------------------------- ADD A NEW JOB ------------------------- <br>
+		<form action="#" th:action="@{addjob}" th:object="${job}"
+			method="post">
+			<table>
+				<tr>
+					<td>
+						<p>Name:</p>
+					</td>
+					<td><input type="text" name="addName" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Category:</p>
+					</td>
+					<td><input type="text" name="addCategory" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Description:</p>
+					</td>
+					<td><textarea name="addDescription" cols="30" rows="5"> </textarea>
+					</td>
+				</tr>
+			</table>
+			<br> <input type="submit" value="Add a new job" /> <input
+				type="reset" value="Clean values" />
+		</form>
+		<br> <br> -------------------- SEARCH A JOB BY NAME -------------------- <br>
+		<form action="#" th:action="@{searchJobName}" th:object="${job}" method="post">
+			<p>
+				Name: <input type="text" name="searchName" />
+			</p>
+			<p>
+				<input type="submit" value="Search job" />
+			</p>
+		</form>
+		<br> <br> -------------------- SEARCH A JOB BY DESCRIPTION -------------------- <br>
+		<form action="#" th:action="@{searchJobDescription}" th:object="${job}" method="post">
+			<p>
+				Description: <input type="text" name="searchDescription" />
+			</p>
+			<p>
+				<input type="submit" value="Search job" />
+			</p>
+		</form>
+		<br> <br> <a href="http://localhost:8080">Return to
+			entities list</a>
 	</div>
 </body>
 </html>

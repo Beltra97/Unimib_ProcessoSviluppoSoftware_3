@@ -7,48 +7,48 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import worksocialmedia.model.AddressUser;
-import worksocialmedia.model.User;
+import worksocialmedia.model.AddressCompany;
+import worksocialmedia.model.Company;
 
-public class UserRepositoryImpl implements UserRepository {
+public class CompanyRepositoryImpl implements CompanyRepository {
 
 	private EntityManagerFactory entityManagerFactory;
 
-	public UserRepositoryImpl() {
+	public CompanyRepositoryImpl() {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("worksocialmedia");
 	}
 
 	@Override
-	public Optional<User> findById(Long id) {
+	public Optional<Company> findById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		User user = entityManager.find(User.class, id);
+		Company company = entityManager.find(Company.class, id);
 		entityManager.close();
-		return Optional.ofNullable(user);
+		return Optional.ofNullable(company);
 	}
 
-	public Optional<AddressUser> findUserAddressById(Long id) {
+	public Optional<AddressCompany> findCompanyAddressById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		AddressUser addressUser = entityManager.find(AddressUser.class, id);
+		AddressCompany addressCompany = entityManager.find(AddressCompany.class, id);
 		entityManager.close();
-		return Optional.ofNullable(addressUser);
+		return Optional.ofNullable(addressCompany);
 	}
 
 	@Override
-	public Iterable<User> findAll() {
+	public Iterable<Company> findAll() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		List<User> users = entityManager.createQuery("FROM User", User.class).getResultList();
+		List<Company> companies = entityManager.createQuery("FROM Company", Company.class).getResultList();
 		entityManager.close();
-		return users;
+		return companies;
 	}
 
-	public void deleteUserById(Long id) {
+	public void deleteCompanyById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			User user = entityManager.find(User.class, id);
-			entityManager.remove(user);
+			Company company = entityManager.find(Company.class, id);
+			entityManager.remove(company);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -56,13 +56,13 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public void addUser(User user) {
+	public void addCompany(Company company) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			entityManager.persist(user);
+			entityManager.persist(company);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -70,18 +70,20 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public void updateUser(Long id, String firstname, String lastname, String gender, String birthdate) {
+	public void updateCompany(Long id, String name, String CEO, Integer numberEmployees, String foundationYear,
+			String description) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			User user = entityManager.find(User.class, id);
-			user.setFirstName(firstname);
-			user.setLastName(lastname);
-			user.setGender(gender);
-			user.setBirthDate(birthdate);
-			entityManager.persist(user);
+			Company company = entityManager.find(Company.class, id);
+			company.setName(name);
+			company.setCEO(CEO);
+			company.setNumberEmployees(numberEmployees);
+			company.setFoundationYear(foundationYear);
+			company.setDescription(description);
+			entityManager.persist(company);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -89,43 +91,42 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public User searchUser(String userSearchLastName) {
+	public Company searchCompany(String CompanySearchName) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		User user = null;
+		Company company = null;
 		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE lower(u.lastName) = '" + userSearchLastName.toLowerCase() + "'")
+			company = (Company) entityManager.createQuery("FROM Company c WHERE lower(c.name) = '" + CompanySearchName.toLowerCase() + "'")
 					.getSingleResult();
 
 			entityManager.close();
 		} catch (Exception ex) {
-			user = null;
+			company = null;
 		}
 
-		return user;
+		return company;
 	}
 
-	public User searchUserBirthDate(String userSearchBirthDate) {
+	public Company searchCompanyCEO(String CompanySearchCEO) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		User user = null;
+		Company company = null;
 		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE u.birthDate = '" + userSearchBirthDate + "'")
-					.getSingleResult();
+			company = (Company) entityManager.createQuery("FROM Company c WHERE lower(c.CEO) = '" + CompanySearchCEO.toLowerCase() + "'")
+					.getResultList();
 
 			entityManager.close();
 		} catch (Exception ex) {
-			user = null;
+			company = null;
 		}
-
-		return user;
+		return company;
 	}
 
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;
 		try {
-			size = entityManager.createQuery("FROM User").getResultList().size();
+			size = entityManager.createQuery("FROM Company").getResultList().size();
 
 			entityManager.close();
 		} catch (Exception ex) {

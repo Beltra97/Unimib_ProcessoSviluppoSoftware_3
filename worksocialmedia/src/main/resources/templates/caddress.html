@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>COMPANY ADDRESS DETAILS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div align="center">
+		<h3>COMPANY ADDRESS DETAILS:</h3>
+		<form action="#"
+			th:action="@{http://localhost:8080/caddresses/updatecaddress{id}(id = ${caddress.id})}"
+			th:object="${caddress}" method="post">
+			<table>
+				<tr>
+					<td><p>Company Address Id:</p></td>
+					<td>
+						<p th:value="${caddress.id}" th:text="${caddress.id}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Company Address Street:</p>
+					</td>
+					<td><Input type="text" name="updateStreet"
+						th:value="${caddress.street}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Company Address Civic Number:</p>
+					</td>
+					<td><Input type="text" name="updateCivicNumber"
+						th:value="${caddress.civicNumber}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Company Address Postal Code:</p>
+					</td>
+					<td><Input type="text" name="updatePostalCode"
+						th:value="${caddress.postalCode}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Company Address Municipality:</p>
+					</td>
+					<td><Input type="text" name="updateMunicipality"
+						th:value="${caddress.municipality}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Company Address Nation:</p>
+					</td>
+					<td><Input type="text" name="updateNation"
+						th:value="${caddress.nation}" /></td>
+				</tr>
+			</table>
+			<br> <input type="submit" value="Update company address">
+		</form>
+		<br> <br> <a href="http://localhost:8080/caddresses">Return
+			to company addresses list</a>
+	</div>
+</body>
+</html>

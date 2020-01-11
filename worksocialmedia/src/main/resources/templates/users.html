@@ -1,15 +1,97 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Users</title>
+<title>USERS HOME PAGE</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<div>
-		<ul th:each="user : ${users}">
-			<li><a th:href="@{/users/{id}(id = ${user.id})}"
-				th:text="${user.firstName + ' ' + user.lastName}"></a></li>
-		</ul>
+	<div align="center">
+		<h2>USERS HOME PAGE</h2>
+		-------------------------- LIST OF ALL USERS --------------------------
+		<br> <br>
+		<table border="1">
+			<tr>
+				<th>User Last Name</th>
+				<th></th>
+			</tr>
+			<tr th:each="user : ${users}">
+				<td width="100" align="center"><a
+					th:href="@{users/{id}(id = ${user.id})}" th:text="${user.lastName}"></a>
+				</td>
+				<td width="100" align="center"><a
+					th:href="@{deleteuser/{id}(id=${user.id})}">Delete</a></td>
+			</tr>
+		</table>
+		<br> Click a user to view user details <br> <br> <br>
+		-------------------------- ADD A NEW USER -------------------------- <br>
+		<form action="#" th:action="@{adduser}" th:object="${user}"
+			method="post">
+			<table>
+				<tr>
+					<td>
+						<p>First Name:</p>
+					</td>
+					<td><input type="text" name="addFirstName" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Last Name:</p>
+					</td>
+					<td><input type="text" name="addLastName" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Gender:</p>
+					</td>
+					<td><select th:name="addGender">
+							<option>---</option>
+							<option th:text="Male" th:value="Male"></option>
+							<option th:text="Female" th:value="Female"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>
+						<p>Birth Date:</p>
+					</td>
+					<td><input type="text" name="addBirthDate" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p>User Address:</p>
+					</td>
+					<td><select th:name="addResidentialAddressId">
+							<option>---</option>
+							<option th:each="uaddress : ${uaddresses}"
+								th:text="${uaddress.id + ' - ' + uaddress.street + ', ' + uaddress.municipality}"
+								th:value="${uaddress.id}"></option>
+					</select></td>
+				</tr>
+			</table>
+			<br> <input type="submit" value="Add a new user" /> <input
+				type="reset" value="Clean values" />
+		</form>
+		<br> <br> ---------------- SEARCH A USER BY LAST NAME ---------------- <br>
+		<form action="#" th:action="@{searchuser}" th:object="${user}"
+			method="post">
+			<p>
+				Last Name: <input type="text" name="userSearchLastName" />
+			</p>
+			<p>
+				<input type="submit" value="Search user" />
+			</p>
+		</form>
+		<br> <br> ---------------- SEARCH A USER BY BIRTH DATE ---------------- <br>
+		<form action="#" th:action="@{searchUserBirthDate}" th:object="${user}"
+			method="post">
+			<p>
+				Birth Date: <input type="text" name="searchBirthDate" />
+			</p>
+			<p>
+				<input type="submit" value="Search user" />
+			</p>
+		</form>
+		<br> <br> <a href="http://localhost:8080">Return to
+			entities list</a>
 	</div>
 </body>
 </html>

@@ -7,48 +7,64 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import worksocialmedia.model.AddressUser;
+import worksocialmedia.model.Company;
+import worksocialmedia.model.Job;
 import worksocialmedia.model.User;
+import worksocialmedia.model.Work;
 
-public class UserRepositoryImpl implements UserRepository {
+public class WorkRepositoryImpl implements WorkRepository {
 
 	private EntityManagerFactory entityManagerFactory;
 
-	public UserRepositoryImpl() {
+	public WorkRepositoryImpl() {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("worksocialmedia");
 	}
 
 	@Override
-	public Optional<User> findById(Long id) {
+	public Optional<Work> findById(Long id) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		Work work = entityManager.find(Work.class, id);
+		entityManager.close();
+		return Optional.ofNullable(work);
+	}
+
+	public Optional<User> findUserById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		User user = entityManager.find(User.class, id);
 		entityManager.close();
 		return Optional.ofNullable(user);
 	}
 
-	public Optional<AddressUser> findUserAddressById(Long id) {
+	public Optional<Company> findCompanyById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		AddressUser addressUser = entityManager.find(AddressUser.class, id);
+		Company company = entityManager.find(Company.class, id);
 		entityManager.close();
-		return Optional.ofNullable(addressUser);
+		return Optional.ofNullable(company);
+	}
+
+	public Optional<Job> findJobById(Long id) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		Job job = entityManager.find(Job.class, id);
+		entityManager.close();
+		return Optional.ofNullable(job);
 	}
 
 	@Override
-	public Iterable<User> findAll() {
+	public Iterable<Work> findAll() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		List<User> users = entityManager.createQuery("FROM User", User.class).getResultList();
+		List<Work> works = entityManager.createQuery("FROM Work", Work.class).getResultList();
 		entityManager.close();
-		return users;
+		return works;
 	}
 
-	public void deleteUserById(Long id) {
+	public void deleteWorkById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			User user = entityManager.find(User.class, id);
-			entityManager.remove(user);
+			Work work = entityManager.find(Work.class, id);
+			entityManager.remove(work);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -56,13 +72,13 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public void addUser(User user) {
+	public void addWork(Work work) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			entityManager.persist(user);
+			entityManager.persist(work);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -70,18 +86,17 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public void updateUser(Long id, String firstname, String lastname, String gender, String birthdate) {
+	public void updateWork(Long id, Integer salary, String startDate, String endDate) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			User user = entityManager.find(User.class, id);
-			user.setFirstName(firstname);
-			user.setLastName(lastname);
-			user.setGender(gender);
-			user.setBirthDate(birthdate);
-			entityManager.persist(user);
+			Work work = entityManager.find(Work.class, id);
+			work.setSalary(salary);
+			work.setStartDate(startDate);
+			work.setEndDate(endDate);
+			entityManager.persist(work);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -89,43 +104,43 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public User searchUser(String userSearchLastName) {
+	public Work searchWorkSalary(Integer workSearchSalary) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		User user = null;
+		Work work = null;
 		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE lower(u.lastName) = '" + userSearchLastName.toLowerCase() + "'")
+			work = (Work) entityManager.createQuery("FROM Work w WHERE w.salary = '" + workSearchSalary + "'")
+					.getSingleResult();
+	
+			entityManager.close();
+		} catch (Exception ex) {
+			work = null;
+		}	
+
+		return work;
+	}
+	
+	public Work searchWorkStartDate(String workSearchStartDate) {
+		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+
+		Work work = null;
+		try {
+			work = (Work) entityManager.createQuery("FROM Work w WHERE w.startDate = '" + workSearchStartDate + "'")
 					.getSingleResult();
 
 			entityManager.close();
 		} catch (Exception ex) {
-			user = null;
+			work = null;
 		}
-
-		return user;
+		
+		return work;
 	}
-
-	public User searchUserBirthDate(String userSearchBirthDate) {
-		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-
-		User user = null;
-		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE u.birthDate = '" + userSearchBirthDate + "'")
-					.getSingleResult();
-
-			entityManager.close();
-		} catch (Exception ex) {
-			user = null;
-		}
-
-		return user;
-	}
-
+	
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;
 		try {
-			size = entityManager.createQuery("FROM User").getResultList().size();
+			size = entityManager.createQuery("FROM Work").getResultList().size();
 
 			entityManager.close();
 		} catch (Exception ex) {
@@ -133,4 +148,5 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 		return size;
 	}
+
 }

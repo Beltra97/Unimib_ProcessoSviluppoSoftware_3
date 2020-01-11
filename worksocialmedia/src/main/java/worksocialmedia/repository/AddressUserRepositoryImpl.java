@@ -8,25 +8,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import worksocialmedia.model.AddressUser;
-import worksocialmedia.model.User;
 
-public class UserRepositoryImpl implements UserRepository {
+public class AddressUserRepositoryImpl implements AddressUserRepository {
 
 	private EntityManagerFactory entityManagerFactory;
 
-	public UserRepositoryImpl() {
+	public AddressUserRepositoryImpl() {
 		this.entityManagerFactory = Persistence.createEntityManagerFactory("worksocialmedia");
 	}
 
 	@Override
-	public Optional<User> findById(Long id) {
-		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		User user = entityManager.find(User.class, id);
-		entityManager.close();
-		return Optional.ofNullable(user);
-	}
-
-	public Optional<AddressUser> findUserAddressById(Long id) {
+	public Optional<AddressUser> findById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		AddressUser addressUser = entityManager.find(AddressUser.class, id);
 		entityManager.close();
@@ -34,21 +26,22 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public Iterable<User> findAll() {
+	public Iterable<AddressUser> findAll() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		List<User> users = entityManager.createQuery("FROM User", User.class).getResultList();
+		List<AddressUser> addressesUser = entityManager.createQuery("FROM AddressUser", AddressUser.class)
+				.getResultList();
 		entityManager.close();
-		return users;
+		return addressesUser;
 	}
 
-	public void deleteUserById(Long id) {
+	public void deleteUserAddressById(Long id) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			User user = entityManager.find(User.class, id);
-			entityManager.remove(user);
+			AddressUser addressUser = entityManager.find(AddressUser.class, id);
+			entityManager.remove(addressUser);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -56,13 +49,13 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public void addUser(User user) {
+	public void addUserAddress(AddressUser addressUser) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			entityManager.persist(user);
+			entityManager.persist(addressUser);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -70,18 +63,20 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public void updateUser(Long id, String firstname, String lastname, String gender, String birthdate) {
+	public void updateUserAddress(Long id, String street, String municipality, String civicNumber, String postalCode,
+			String nation) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		try {
 			if (!entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().begin();
 			}
-			User user = entityManager.find(User.class, id);
-			user.setFirstName(firstname);
-			user.setLastName(lastname);
-			user.setGender(gender);
-			user.setBirthDate(birthdate);
-			entityManager.persist(user);
+			AddressUser addressUser = entityManager.find(AddressUser.class, id);
+			addressUser.setStreet(street);
+			addressUser.setMunicipality(municipality);
+			addressUser.setCivicNumber(civicNumber);
+			addressUser.setPostalCode(postalCode);
+			addressUser.setNation(nation);
+			entityManager.persist(addressUser);
 			entityManager.getTransaction().commit();
 			entityManager.close();
 		} catch (Exception ex) {
@@ -89,43 +84,28 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
-	public User searchUser(String userSearchLastName) {
+	public AddressUser searchUserAddress(String jobSearchNameStreet) {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 
-		User user = null;
+		AddressUser addressUser = null;
 		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE lower(u.lastName) = '" + userSearchLastName.toLowerCase() + "'")
+			addressUser = (AddressUser) entityManager
+					.createQuery("FROM AddressUser au WHERE lower(au.street) = '" + jobSearchNameStreet.toLowerCase() + "'")
 					.getSingleResult();
 
 			entityManager.close();
 		} catch (Exception ex) {
-			user = null;
+			addressUser = null;
 		}
 
-		return user;
-	}
-
-	public User searchUserBirthDate(String userSearchBirthDate) {
-		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-
-		User user = null;
-		try {
-			user = (User) entityManager.createQuery("FROM User u WHERE u.birthDate = '" + userSearchBirthDate + "'")
-					.getSingleResult();
-
-			entityManager.close();
-		} catch (Exception ex) {
-			user = null;
-		}
-
-		return user;
+		return addressUser;
 	}
 
 	public int getSize() {
 		final EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		int size = 0;
 		try {
-			size = entityManager.createQuery("FROM User").getResultList().size();
+			size = entityManager.createQuery("FROM AddressUser").getResultList().size();
 
 			entityManager.close();
 		} catch (Exception ex) {
@@ -133,4 +113,5 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 		return size;
 	}
+
 }
