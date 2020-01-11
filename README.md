@@ -6,6 +6,12 @@ L'applicazione JobSocialNetwork, scritta in Java, è un nuovo social network
 pensato per il mondo lavorativo, in cui le aziende possono ricercare profili 
 interessanti e viceversa.
 
+L'applicazione Spring implementa sia l'architettura MVC,
+che la persistenza dei data con Java JPA.
+
+E' presente anche una parte di test in JUnit per verificare la corretta esecuzione
+delle operazioni CRUD (CREATE, READ, UPDATE, DELETE) per ogni entità presente.
+
 Dalla homepage raggiungibile all'indirizzo "http://localhost:8080" è possibile
 accedere alle varie pagine di gestione delle varie entità.
 
